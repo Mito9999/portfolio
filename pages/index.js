@@ -16,10 +16,22 @@ export default function Home({ githubData }) {
         <p>Showing {githubData.length} of 30</p>
         {githubData.map((event) => (
           <Box key={event.id} my="30px">
-            <Link href={event.repo.url}>{event.repo.name}</Link>
-            {event.type === "PushEvent" && (
-              <Text>{event.payload.commits[0].message}</Text>
-            )}
+            <Heading size="sm" as="h4">
+              <Link
+                href={`https://github.com/Mito9999/portfolio/commit/${event.payload.commits[0].sha}`}
+              >
+                {event.repo.name}
+              </Link>
+            </Heading>
+            <Text>
+              {new Date(event.created_at).toLocaleString("en-US", {
+                month: "numeric",
+                day: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+              })}
+            </Text>
+            <Text>{event.payload.commits[0].message}</Text>
           </Box>
         ))}
         {/* <Button>Show More</Button> */}
@@ -32,7 +44,10 @@ export async function getServerSideProps() {
   const res = await fetch("https://api.github.com/users/Mito9999/events");
   const data = await res.json();
 
-  const githubData = data.slice(0, 5);
+  // TODO: Add support for other events such as comments
+  const githubData = data
+    .filter((event) => event.type === "PushEvent")
+    .slice(0, 5);
 
   return githubData
     ? {
