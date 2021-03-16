@@ -1,44 +1,12 @@
 import Head from "next/head";
-import NextLink from "next/link";
-import {
-  Container,
-  Box,
-  Heading,
-  Flex,
-  Spacer,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
 
 export default function Home() {
   return (
-    <Container maxW="1000px">
+    <>
       <Head>
         <title>Mito - Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <header>
-        <Flex my="40px" align="center">
-          <Box>
-            <Heading size="lg">Mito</Heading>
-          </Box>
-          <Spacer />
-          <Box>
-            <NextLink href="/">
-              <ChakraLink mr="8">Projects</ChakraLink>
-            </NextLink>
-            <NextLink href="/">
-              <ChakraLink mr="8">Awards</ChakraLink>
-            </NextLink>
-            <NextLink href="/">
-              <ChakraLink mr="8">Services</ChakraLink>
-            </NextLink>
-            <NextLink href="/">
-              <ChakraLink>Contact</ChakraLink>
-            </NextLink>
-          </Box>
-        </Flex>
-      </header>
 
       <main>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae tenetur,
@@ -96,6 +64,6 @@ export default function Home() {
         soluta obcaecati, quas temporibus natus odit veniam quibusdam ex.
         Maiores beatae cumque eaque quis delectus non sequi vel!
       </main>
-    </Container>
+    </>
   );
 }
