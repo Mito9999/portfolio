@@ -1,19 +1,19 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Heading, Button, Box, Text } from "@chakra-ui/react";
+import { Heading, Box, Text } from "@chakra-ui/react";
 
 // TODO: make custom pages for each github repo/commit
 export default function Home({ githubData }) {
   return (
     <>
       <Head>
-        <title>Mito - Home</title>
+        <title>Mito's Portfolio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <Heading size="md">GitHub</Heading>
-        <p>Showing {githubData.length} of 30</p>
+        <p>Showing {githubData.length} events</p>
         {githubData.map((event) => (
           <Box key={event.id} my="30px">
             <Heading size="sm" as="h4">
