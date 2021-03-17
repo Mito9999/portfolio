@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Image from "next/image";
+import Link from "next/Link";
 import { Box, Heading, Text, Badge } from "@chakra-ui/react";
 
 const projects = [
@@ -7,6 +9,11 @@ const projects = [
     title: "Statboard",
     description:
       "The one place to view all of your information from various sources!",
+    image: {
+      src: "/../public/statboard.png",
+      width: "1050px",
+      height: "705px",
+    },
     story:
       "I built this application to boost my productivity and gain insight into my goals. I wanted a way to track how well I was doing over time, and learn some useful technologies along the way.",
     tech: ["React.js", "JavaScript", "Styled Components", "CSS", "APIs"],
@@ -15,6 +22,11 @@ const projects = [
     id: 2,
     title: "Feed",
     description: "A customizable display of your most important media.",
+    image: {
+      src: "/../public/feed.png",
+      width: "1059px",
+      height: "931px",
+    },
     story:
       "This was my first TypeScript and Chakra UI experience. I learned a lot about both of these technologies through the creation of this project and its features. In order to create a truly customizable feed, I had to become efficient at consuming APIs. While creating the infinite scrolling feature, I learned about optimizing components for performance and compatibility.",
     tech: ["React.js", "TypeScript", "Chakra UI", "APIs"],
@@ -23,6 +35,11 @@ const projects = [
     id: 3,
     title: "Dyftd",
     description: "Did you feed the dog? Collaborative toggles.",
+    image: {
+      src: "/../public/dyftd.png",
+      width: "1077px",
+      height: "803px",
+    },
     story:
       "My first experience with the MERN(T) Stack. User Experience was my main goal in mind, so I  made the application as smooth as possible with clean animations and consistency. After getting one of my MongoDB certificates, I reimplemented and restructured the backend for scalability",
     tech: [
@@ -73,9 +90,24 @@ export default function Projects() {
               ))}
             </Text>
 
-            <Text my="40px">
-              <i>Demo will go here</i>
-            </Text>
+            <Box
+              my="30px"
+              cursor="pointer"
+              _hover={{ transform: "scale(1.04)" }}
+              transition={"all 250ms"}
+            >
+              {project.image && (
+                <Link href={`/apps/${project.title.toLowerCase()}`}>
+                  <Image
+                    src={project.image.src}
+                    alt={`${project.title} demo`}
+                    width={project.image.width}
+                    height={project.image.height}
+                    quality={100}
+                  />
+                </Link>
+              )}
+            </Box>
             <Text>{project.story}</Text>
           </Box>
         ))}
