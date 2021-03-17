@@ -1,7 +1,58 @@
 import Head from "next/head";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading, Text, Badge } from "@chakra-ui/react";
 
-export default function Home() {
+const projects = [
+  {
+    id: 1,
+    title: "Statboard",
+    description:
+      "The one place to view all of your information from various sources!",
+    story:
+      "I built this application to boost my productivity and gain insight into my goals. I wanted a way to track how well I was doing over time, and learn some useful technologies along the way.",
+    tech: ["React.js", "JavaScript", "Styled Components", "CSS", "APIs"],
+  },
+  {
+    id: 2,
+    title: "Feed",
+    description: "A customizable display of your most important media.",
+    story:
+      "This was my first TypeScript and Chakra UI experience. I learned a lot about both of these technologies through the creation of this project and its features. In order to create a truly customizable feed, I had to become efficient at consuming APIs. While creating the infinite scrolling feature, I learned about optimizing components for performance and compatibility.",
+    tech: ["React.js", "TypeScript", "Chakra UI", "APIs"],
+  },
+  {
+    id: 3,
+    title: "Dyftd",
+    description: "Did you feed the dog? Collaborative toggles.",
+    story:
+      "My first experience with the MERN(T) Stack. User Experience was my main goal in mind, so I  made the application as smooth as possible with clean animations and consistency. After getting one of my MongoDB certificates, I reimplemented and restructured the backend for scalability",
+    tech: [
+      "React.js",
+      "TypeScript",
+      "Chakra UI",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+    ],
+  },
+  {
+    id: 4,
+    title: "Money Tracker",
+    description: "An easy way to visualize your spending and savings habits!",
+    story:
+      "I have always been careful with money. However, this project made me see some of the areas that I could improve in, by visualizing every dollar that comes in and goes out.",
+    tech: ["React.js", "TypeScript", "SCSS"],
+  },
+  {
+    id: 5,
+    title: "Cars",
+    description: "A simple API for finding great deals on cars.",
+    story:
+      "In search of finding a good deal on a used car, I created this API + Discord Bot which gathers car deals from Craigslist and sends a message of new listings.",
+    tech: ["Node.js", "Express.js", "Puppeteer", "Discord.js"],
+  },
+];
+
+export default function Projects() {
   return (
     <>
       <Head>
@@ -10,11 +61,24 @@ export default function Home() {
       </Head>
 
       <main>
-        <Box mb="40px">Project #1</Box>
-        <Box mb="40px">Project #2</Box>
-        <Box mb="40px">Project #3</Box>
-        <Box mb="40px">Project #4</Box>
-        <Box mb="40px">Project #5</Box>
+        {projects.map((project) => (
+          <Box key={project.id} mb="40px">
+            <Heading size="md">{project.title}</Heading>
+            <Text>{project.description}</Text>
+            <Text>
+              {project.tech.map((technology) => (
+                <Badge colorScheme="blue" mr="10px" key={technology}>
+                  {technology}
+                </Badge>
+              ))}
+            </Text>
+
+            <Text my="40px">
+              <i>Demo will go here</i>
+            </Text>
+            <Text>{project.story}</Text>
+          </Box>
+        ))}
       </main>
     </>
   );
