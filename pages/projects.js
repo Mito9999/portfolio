@@ -10,7 +10,7 @@ const projects = [
     description:
       "The one place to view all of your information from various sources!",
     image: {
-      src: "/../public/statboard.png",
+      src: "/statboard.png",
       width: "1050px",
       height: "705px",
     },
@@ -23,7 +23,7 @@ const projects = [
     title: "Feed",
     description: "A customizable display of your most important media.",
     image: {
-      src: "/../public/feed.png",
+      src: "/feed.png",
       width: "1059px",
       height: "931px",
     },
@@ -36,7 +36,7 @@ const projects = [
     title: "Dyftd",
     description: "Did you feed the dog? Collaborative toggles.",
     image: {
-      src: "/../public/dyftd.png",
+      src: "/dyftd.png",
       width: "1077px",
       height: "803px",
     },
