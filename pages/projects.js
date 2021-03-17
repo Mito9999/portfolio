@@ -84,7 +84,9 @@ export default function Projects() {
             mb="20px"
             pb="20px"
             borderBottom={
-              project.id !== projects.length ? "1px dashed gray" : "none"
+              project.id !== projects.length
+                ? "3px dashed rgb(234, 240, 245)"
+                : "none"
             }
           >
             <Heading size="md">{project.title}</Heading>

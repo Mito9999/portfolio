@@ -1,9 +1,22 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Heading, Box, Text } from "@chakra-ui/react";
+import { Heading, Box, Text, Grid } from "@chakra-ui/react";
+
+const numberToOrdinal = (number) => {
+  const ordinalRules = new Intl.PluralRules("en", {
+    type: "ordinal",
+  });
+  const suffixes = {
+    one: "st",
+    two: "nd",
+    few: "rd",
+    other: "th",
+  };
+  return `${number}${suffixes[ordinalRules.select(number)]}`;
+};
 
 // TODO: make custom pages for each github repo/commit
-export default function Home({ githubData }) {
+export default function Home({ repos, githubData, typingData }) {
   return (
     <>
       <Head>
@@ -12,48 +25,127 @@ export default function Home({ githubData }) {
       </Head>
 
       <main>
-        <Heading size="md">GitHub</Heading>
-        <p>Showing {githubData.length} events</p>
-        {githubData.map((event) => (
-          <Box key={event.id} my="30px">
-            <Heading size="sm" as="h4">
-              <Link
-                href={`https://github.com/Mito9999/portfolio/commit/${event.payload.commits[0].sha}`}
-              >
-                {event.repo.name}
-              </Link>
+        <Heading as="h2" textAlign="center" mb="40px">
+          What have I been up to?
+        </Heading>
+        <Grid templateColumns="1fr 1fr" gap="20px">
+          <Box
+            border="3px dashed rgb(200, 210, 215)"
+            borderRadius="15px"
+            p="15px"
+          >
+            <Heading size="md" as="h3">
+              GitHub
             </Heading>
             <Text>
-              {new Date(event.created_at).toLocaleString("en-US", {
-                month: "numeric",
-                day: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-              })}
+              Most Recent Actions{" "}
+              <span style={{ color: "rgb(200, 210, 215)" }}>
+                / {repos} repos
+              </span>
             </Text>
-            <Text>{event.payload.commits[0].message}</Text>
+            {githubData.map((event) => (
+              <Box key={event.id} mt="30px">
+                <Heading size="sm" as="h4">
+                  <Link
+                    href={`https://github.com/Mito9999/portfolio/commit/${event.payload.commits[0].sha}`}
+                  >
+                    {event.repo.name}
+                  </Link>
+                </Heading>
+                <Text>{event.payload.commits[0].message}</Text>
+                <Text>
+                  {new Date(event.created_at).toLocaleString("en-US", {
+                    month: "numeric",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </Text>
+              </Box>
+            ))}
           </Box>
-        ))}
-        {/* <Button>Show More</Button> */}
+
+          <Box
+            border="3px dashed rgb(200, 210, 215)"
+            borderRadius="15px"
+            p="15px"
+          >
+            <Heading size="md" as="h3">
+              Typing
+            </Heading>
+            <Text>
+              Most Recent Tests{" "}
+              <span style={{ color: "rgb(200, 210, 215)" }}>
+                / {typingData.testsTaken}
+              </span>
+            </Text>
+            {typingData.scores.map((score, idx) => (
+              <Box key={score.date} mt="30px">
+                <Heading size="sm" as="h4">
+                  {numberToOrdinal(typingData.testsTaken - idx)} Test
+                </Heading>
+                <Text>
+                  {score.wpm} WPM &amp; {score.mistakes} Mistakes
+                </Text>
+                <Text>
+                  {new Date(score.date).toLocaleString("en-US", {
+                    month: "numeric",
+                    day: "numeric",
+                    hour: "numeric",
+                    minute: "numeric",
+                  })}
+                </Text>
+              </Box>
+            ))}
+          </Box>
+        </Grid>
       </main>
     </>
   );
 }
 
 export async function getServerSideProps() {
-  const res = await fetch("https://api.github.com/users/Mito9999/events");
-  const data = await res.json();
+  let repos = 17;
+  let githubData = [];
+  let typingData = { scores: [], average: 0, testsTaken: 615 };
 
-  // TODO: Add support for other events such as comments
-  const githubData = data
-    .filter((event) => event.type === "PushEvent")
-    .slice(0, 5);
+  try {
+    const githubRes = await fetch(
+      "https://api.github.com/users/Mito9999/events"
+    );
+    const ghData = await githubRes.json();
+    githubData = ghData
+      .filter((event) => event.type === "PushEvent")
+      .slice(0, 5);
 
-  return githubData
-    ? {
-        props: { githubData },
-      }
-    : {
-        notFound: true,
-      };
+    const ghProfileRes = await fetch("https://api.github.com/users/Mito9999");
+    const { public_repos } = await ghProfileRes.json();
+    repos = public_repos;
+
+    const typingRes = await fetch(
+      "https://10fastfingers.com/users/get_graph_data/0/2069581"
+    );
+    const { avg_norm, graph_data, languages_sorted } = await typingRes.json();
+    const totalTypingTests = languages_sorted[0][0].anzahl;
+    const last5Scores = graph_data
+      .slice(graph_data.length - 5, graph_data.length)
+      .map((scoresObj) => ({
+        wpm: scoresObj.g1,
+        date: scoresObj.date,
+        mistakes: scoresObj.backspace_pressed,
+      }))
+      .reverse();
+
+    typingData = {
+      scores: last5Scores,
+      average: avg_norm,
+      testsTaken: Number(totalTypingTests),
+    };
+  } catch (err) {
+    console.log(err);
+  }
+
+  return {
+    props: { repos, githubData, typingData },
+  };
 }
