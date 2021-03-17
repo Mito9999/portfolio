@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/Link";
+import Link from "next/link";
 import { Box, Heading, Text, Badge } from "@chakra-ui/react";
 
 const projects = [
@@ -79,7 +79,14 @@ export default function Projects() {
 
       <main>
         {projects.map((project) => (
-          <Box key={project.id} mb="40px">
+          <Box
+            key={project.id}
+            mb="20px"
+            pb="20px"
+            borderBottom={
+              project.id !== projects.length ? "1px dashed gray" : "none"
+            }
+          >
             <Heading size="md">{project.title}</Heading>
             <Text>{project.description}</Text>
             <Text>
