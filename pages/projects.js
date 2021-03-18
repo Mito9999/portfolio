@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Box, Heading, Text, Badge } from "@chakra-ui/react";
+import Title from "../components/Title";
 
 const projects = [
   {
@@ -78,6 +79,8 @@ export default function Projects() {
       </Head>
 
       <main>
+        <Title text="Projects" />
+
         {projects.map((project) => (
           <Box
             key={project.id}
@@ -102,7 +105,7 @@ export default function Projects() {
             <Box
               my="30px"
               cursor="pointer"
-              _hover={{ transform: "scale(1.04)" }}
+              _hover={{ transform: "scale(1.03)" }}
               transition={"all 250ms"}
             >
               {project.image && (

@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Heading, Box, Text, Grid, useMediaQuery } from "@chakra-ui/react";
+import { Heading, Box, Text, Grid } from "@chakra-ui/react";
+import Title from "../components/Title";
 
 const numberToOrdinal = (number) => {
   const ordinalRules = new Intl.PluralRules("en", {
@@ -25,9 +26,8 @@ export default function Home({ repos, githubData, typingData }) {
       </Head>
 
       <main>
-        <Heading as="h2" textAlign="center" mb="40px">
-          What have I been up to?
-        </Heading>
+        <Title text="What have I been up to?" />
+
         <Grid
           templateColumns={"repeat(auto-fit, minmax(325px, 1fr))"}
           gap="20px"

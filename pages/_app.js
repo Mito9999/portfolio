@@ -12,6 +12,13 @@ import {
 
 const extendedTheme = extendTheme({
   fonts: { body: "Inter", heading: "Inter", mono: "Inter" },
+  styles: {
+    global: {
+      html: {
+        overflowY: "scroll",
+      },
+    },
+  },
 });
 
 function MyApp({ Component, pageProps }) {
