@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Heading, Box, Text, Grid } from "@chakra-ui/react";
+import { Heading, Box, Text, Grid, useMediaQuery } from "@chakra-ui/react";
 
 const numberToOrdinal = (number) => {
   const ordinalRules = new Intl.PluralRules("en", {
@@ -28,7 +28,11 @@ export default function Home({ repos, githubData, typingData }) {
         <Heading as="h2" textAlign="center" mb="40px">
           What have I been up to?
         </Heading>
-        <Grid templateColumns="1fr 1fr" gap="20px">
+        <Grid
+          templateColumns={"repeat(auto-fit, minmax(325px, 1fr))"}
+          gap="20px"
+          mb="30px"
+        >
           <Box
             border="3px dashed rgb(200, 210, 215)"
             borderRadius="15px"
@@ -122,8 +126,27 @@ export async function getServerSideProps() {
     const { public_repos } = await ghProfileRes.json();
     repos = public_repos;
 
+    const headersArray = [
+      ["authority", "10fastfingers.com"],
+      ["content-length", "0"],
+      ["accept", "application/json, text/javascript, */*; q=0.01"],
+      [
+        "user-agent",
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.152 Safari/537.36",
+      ],
+      ["x-requested-with", "XMLHttpRequest"],
+      ["origin", "https://10fastfingers.com"],
+    ];
+    let myHeaders = new Headers();
+    headersArray.forEach((header) => myHeaders.append(header[0], header[1]));
+
     const typingRes = await fetch(
-      "https://10fastfingers.com/users/get_graph_data/0/2069581"
+      "https://statboard.vercel.app/api/proxy/10fastfingers.com/users/get_graph_data/0/2069581",
+      {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      }
     );
     const { avg_norm, graph_data, languages_sorted } = await typingRes.json();
     const totalTypingTests = languages_sorted[0][0].anzahl;

@@ -7,7 +7,6 @@ import {
   Box,
   Heading,
   Flex,
-  Spacer,
   Button,
 } from "@chakra-ui/react";
 
@@ -19,6 +18,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
           rel="stylesheet"
@@ -28,16 +30,20 @@ function MyApp({ Component, pageProps }) {
       <ChakraProvider theme={extendedTheme}>
         <Container maxW="1000px">
           <header>
-            <Flex my="40px" align="center">
-              <Box>
+            <Flex
+              my="40px"
+              align="center"
+              justify="space-between"
+              flexWrap="wrap"
+            >
+              <Box textAlign="center">
                 <Heading size="xl" cursor="pointer" fontWeight="900">
-                  <Link href="/">Mito</Link>
+                  <Link href="/">Portfolio</Link>
                 </Heading>
               </Box>
-              <Spacer />
-              <Box>
+              <Flex justify="center">
                 <Link href="/projects">
-                  <Button variant="link" color="black" mr="8">
+                  <Button variant="link" color="black" mx="8">
                     Projects
                   </Button>
                 </Link>
@@ -54,7 +60,7 @@ function MyApp({ Component, pageProps }) {
                 <Link href="/contact">
                   <Button colorScheme="blue">Contact</Button>
                 </Link>
-              </Box>
+              </Flex>
             </Flex>
           </header>
           <Component {...pageProps} />
