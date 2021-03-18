@@ -1,8 +1,63 @@
 import Head from "next/head";
-import { Box, Heading, Text, Badge } from "@chakra-ui/react";
+import { Box, Heading, Badge } from "@chakra-ui/react";
 import Title from "../components/Title";
 
 const awards = [
+  {
+    title: "C100DEV: MongoDB Certified Developer Associate",
+    date: "Not Finished",
+    contentColor: "red",
+    content: ["Exam"],
+  },
+  {
+    title: "M320: MongoDB Data Modeling",
+    date: "Not Finished",
+    contentColor: "green",
+    content: ["Schemas", "Data Patterns", "Document Relationships"],
+  },
+  {
+    title: "M201: MongoDB Performance",
+    date: "Not Finished",
+    contentColor: "green",
+    content: ["Scaling", "Optimization", "Indexing", "Performance Analysis"],
+  },
+  {
+    title: "M220JS: MongoDB with JavaScript",
+    date: "Not Finished",
+    contentColor: "green",
+    content: [
+      "Node.js",
+      "Exception Handling",
+      "Timeouts",
+      "Analytic Reporting",
+      "Resilience",
+      "Security",
+    ],
+  },
+  {
+    title: "M121: MongoDB Aggregation Framework",
+    date: "Not Finished",
+    contentColor: "green",
+    content: [
+      "Projection",
+      "Utility Stages",
+      "Multidimensional Grouping",
+      "Aggregation Performance",
+      "Pipeline Optimization",
+    ],
+  },
+  {
+    title: "M103: MongoDB Cluster Administration",
+    date: "Not Finished",
+    contentColor: "green",
+    content: [
+      "Mongod",
+      "Replication",
+      "Set Administration",
+      "Sharding",
+      "Cluster Management",
+    ],
+  },
   {
     title: "M001: MongoDB Basics",
     date: "March 2021",
