@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 import { Box, Heading, Text, Badge } from "@chakra-ui/react";
 import Title from "../components/Title";
 
@@ -8,6 +7,7 @@ const projects = [
   {
     id: 1,
     title: "Statboard",
+    url: "https://statboard.vercel.app/",
     description:
       "The one place to view all of your information from various sources!",
     image: {
@@ -22,6 +22,7 @@ const projects = [
   {
     id: 2,
     title: "Feed",
+    url: "https://my-feed.netlify.app/",
     description: "A customizable display of your most important media.",
     image: {
       src: "/feed.png",
@@ -35,6 +36,7 @@ const projects = [
   {
     id: 3,
     title: "Dyftd",
+    url: "https://dyftd.vercel.app/",
     description: "Did you feed the dog? Collaborative toggles.",
     image: {
       src: "/dyftd.png",
@@ -109,7 +111,7 @@ export default function Projects() {
               transition={"all 250ms"}
             >
               {project.image && (
-                <Link href={`/apps/${project.title.toLowerCase()}`}>
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
                   <Image
                     src={project.image.src}
                     alt={`${project.title} demo`}
@@ -117,7 +119,7 @@ export default function Projects() {
                     height={project.image.height}
                     quality={100}
                   />
-                </Link>
+                </a>
               )}
             </Box>
             <Text>{project.story}</Text>
