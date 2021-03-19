@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Heading, Box, Text, Grid } from "@chakra-ui/react";
+import { Heading, Box, Text, Grid, Flex, Badge } from "@chakra-ui/react";
 import Title from "../components/Title";
 
 const numberToOrdinal = (number) => {
@@ -16,6 +16,54 @@ const numberToOrdinal = (number) => {
   return `${number}${suffixes[ordinalRules.select(number)]}`;
 };
 
+const skills = [
+  {
+    title: "HTML",
+    color: "orange",
+    iconClass: "devicon-html5-plain",
+  },
+  {
+    title: "CSS",
+    color: "blue",
+    iconClass: "devicon-css3-plain",
+  },
+  {
+    title: "JavaScript",
+    color: "yellow",
+    iconClass: "devicon-javascript-plain",
+  },
+  {
+    title: "TypeScript",
+    color: "blue",
+    iconClass: "devicon-typescript-plain",
+  },
+  {
+    title: "Git",
+    color: "blackAlpha",
+    iconClass: "devicon-git-plain",
+  },
+  {
+    title: "MongoDB",
+    color: "green",
+    iconClass: "devicon-mongodb-plain",
+  },
+  {
+    title: "Express",
+    color: "gray",
+    iconClass: "devicon-express-original",
+  },
+  {
+    title: "React",
+    color: "blue",
+    iconClass: "devicon-react-original",
+  },
+  {
+    title: "NodeJS",
+    color: "green",
+    iconClass: "devicon-nodejs-plain",
+  },
+];
+
 // TODO: make custom pages for each github repo/commit
 export default function Home({ repos, githubData, typingData }) {
   return (
@@ -23,10 +71,33 @@ export default function Home({ repos, githubData, typingData }) {
       <Head>
         <title>Mito's Portfolio</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.10.1/devicon.min.css"
+        />
       </Head>
 
       <main>
-        <Title text="What have I been up to?" />
+        <Title text="Skills" />
+        <Flex justify="space-between" wrap="wrap" fontSize="100px">
+          {skills.map((skill) => (
+            <Flex
+              direction="column"
+              key={skill.title}
+              _hover={{ transform: "scale(1.08)" }}
+              transition="transform 200ms"
+            >
+              <Badge colorScheme={skill.color} textAlign="center" mx="4px">
+                {skill.title}
+              </Badge>
+              <Box fontSize="100px">
+                <i className={skill.iconClass}></i>
+              </Box>
+            </Flex>
+          ))}
+        </Flex>
+
+        <Title text="Personal Dashboard" />
 
         <Grid
           templateColumns={"repeat(auto-fit, minmax(325px, 1fr))"}
