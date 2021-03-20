@@ -52,7 +52,7 @@ export default async function handler(_, res) {
       scores: last5Scores,
       testsTaken: Number(totalTypingTests),
     };
-    const jsonData = { repos, ghData, typingData };
+    const jsonData = { repos, githubData: ghData, typingData };
     cache.put("values", jsonData, FIVE_MINUTES);
     res.status(200).json({ isCached: false, ...jsonData });
   } catch (err) {

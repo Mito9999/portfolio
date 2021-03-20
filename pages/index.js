@@ -76,6 +76,7 @@ const skills = [
 // TODO: make custom pages for each github repo/commit
 export default function Home() {
   const [stats, setStats] = useState({
+    isCached: false,
     repos: 17,
     githubData: [],
     typingData: {
