@@ -44,15 +44,8 @@ const projects = [
       height: "803px",
     },
     story:
-      "My first experience with the MERN(T) Stack. User Experience was my main goal in mind, so I  made the application as smooth as possible with clean animations and consistency. After getting one of my MongoDB certificates, I reimplemented and restructured the backend for scalability",
-    tech: [
-      "React.js",
-      "TypeScript",
-      "Chakra UI",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-    ],
+      "My first experience with the MERN(T) Stack. User Experience was my main goal in mind, so I  made the application as smooth as possible with clean animations and consistency. After getting one of my MongoDB certificates, I reimplemented and restructured the backend for scalability. This project was originially built with Create React App (Express + Node), but was migrated to Next.js (Serverless).",
+    tech: ["React.js", "TypeScript", "Chakra UI", "MongoDB", "Next.js"],
   },
   {
     id: 4,
