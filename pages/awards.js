@@ -133,7 +133,7 @@ export default function Awards() {
             </Heading>
             <Badge mr="10px">{award.date}</Badge>
             {award.content.map((skill) => (
-              <Badge colorScheme={award.contentColor} mr="10px">
+              <Badge key={skill} colorScheme={award.contentColor} mr="10px">
                 {skill}
               </Badge>
             ))}

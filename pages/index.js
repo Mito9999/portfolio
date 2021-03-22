@@ -8,6 +8,7 @@ import {
   Flex,
   Badge,
   Spinner,
+  Link as ChakraLink,
 } from "@chakra-ui/react";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
@@ -98,7 +99,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Mito's Portfolio</title>
+        <title>Mito</title>
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="stylesheet"
@@ -107,6 +108,16 @@ export default function Home() {
       </Head>
 
       <main>
+        <Title text="About Me" />
+        <Text mb="25px" textAlign={["left", "justify"]}>
+          Hey! I'm Mito, a dependable web developer. I have been coding
+          professionally for over a year, and amateurly for over four years. I
+          am always eager to learn new technologies and techniques. My primary
+          focus has been on front-end development, but I also have experience
+          with back-end technologies. Through the development of various
+          projects, I have found new ways to improve efficiency and
+          sustainability.
+        </Text>
         <Title text="Skills" />
         <Flex justify="space-between" wrap="wrap" fontSize="100px">
           {skills.map((skill) => (
@@ -139,7 +150,9 @@ export default function Home() {
             p="15px"
           >
             <Heading size="md" as="h3">
-              GitHub
+              <ChakraLink href="https://github.com/Mito9999" isExternal>
+                GitHub
+              </ChakraLink>
             </Heading>
             <Text>
               Most Recent Actions{" "}
@@ -179,7 +192,12 @@ export default function Home() {
             p="15px"
           >
             <Heading size="md" as="h3">
-              Typing
+              <ChakraLink
+                href="https://10fastfingers.com/user/2069581/"
+                isExternal
+              >
+                Typing
+              </ChakraLink>
             </Heading>
             <Text>
               Most Recent Tests{" "}
