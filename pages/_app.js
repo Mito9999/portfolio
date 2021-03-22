@@ -41,27 +41,47 @@ function MyApp({ Component, pageProps }) {
             <Flex my="40px" align="center" justify="space-between">
               <Box textAlign="center">
                 <Heading size="xl" cursor="pointer" fontWeight="900">
-                  <Link href="/">Portfolio</Link>
+                  <Link href="/">Mito</Link>
                 </Heading>
               </Box>
-              <Flex justify="center" direction={["column", "column", "row"]}>
+              <Flex justify="center" direction={["column", "row", "row"]}>
                 <Link basis href="/projects">
-                  <Button variant="link" color="black" mx="4" my="2">
+                  <Button
+                    variant="link"
+                    color="black"
+                    mx={["2", "2", "4"]}
+                    my="2"
+                  >
                     Projects
                   </Button>
                 </Link>
                 <Link href="/awards">
-                  <Button variant="link" color="black" mx="4" my="2">
+                  <Button
+                    variant="link"
+                    color="black"
+                    mx={["2", "2", "4"]}
+                    my="2"
+                  >
                     Awards
                   </Button>
                 </Link>
                 <Link href="/services">
-                  <Button variant="link" color="black" mx="4" my="2">
+                  <Button
+                    variant="link"
+                    color="black"
+                    mx={["2", "2", "4"]}
+                    my="2"
+                  >
                     Services
                   </Button>
                 </Link>
                 <Link href="/contact">
-                  <Button colorScheme="blue" mx={["4", "4", "0"]} my="2">
+                  <Button
+                    colorScheme="blue"
+                    ml={["2", "2", "4"]}
+                    mr={["2", "2", "0"]}
+                    my="2"
+                  >
                     Contact
                   </Button>
                 </Link>
