@@ -1,51 +1,51 @@
 import Head from "next/head";
-import { Box, Heading, Badge } from "@chakra-ui/react";
+import { Box, Heading, Badge, Text } from "@chakra-ui/react";
 import Title from "../components/Title";
 
 const awards = [
-  {
-    title: "C100DEV: MongoDB Certified Developer Associate",
-    date: "Not Finished",
-    contentColor: "red",
-    content: ["Exam"],
-  },
-  {
-    title: "M320: MongoDB Data Modeling",
-    date: "Not Finished",
-    contentColor: "green",
-    content: ["Schemas", "Data Patterns", "Document Relationships"],
-  },
-  {
-    title: "M201: MongoDB Performance",
-    date: "Not Finished",
-    contentColor: "green",
-    content: ["Scaling", "Optimization", "Indexing", "Performance Analysis"],
-  },
-  {
-    title: "M220JS: MongoDB with JavaScript",
-    date: "Not Finished",
-    contentColor: "green",
-    content: [
-      "Node.js",
-      "Exception Handling",
-      "Timeouts",
-      "Analytic Reporting",
-      "Resilience",
-      "Security",
-    ],
-  },
-  {
-    title: "M121: MongoDB Aggregation Framework",
-    date: "Not Finished",
-    contentColor: "green",
-    content: [
-      "Projection",
-      "Utility Stages",
-      "Multidimensional Grouping",
-      "Aggregation Performance",
-      "Pipeline Optimization",
-    ],
-  },
+  // {
+  //   title: "C100DEV: MongoDB Certified Developer Associate",
+  //   date: "Not Finished",
+  //   contentColor: "red",
+  //   content: ["Exam"],
+  // },
+  // {
+  //   title: "M320: MongoDB Data Modeling",
+  //   date: "Not Finished",
+  //   contentColor: "green",
+  //   content: ["Schemas", "Data Patterns", "Document Relationships"],
+  // },
+  // {
+  //   title: "M201: MongoDB Performance",
+  //   date: "Not Finished",
+  //   contentColor: "green",
+  //   content: ["Scaling", "Optimization", "Indexing", "Performance Analysis"],
+  // },
+  // {
+  //   title: "M220JS: MongoDB with JavaScript",
+  //   date: "Not Finished",
+  //   contentColor: "green",
+  //   content: [
+  //     "Node.js",
+  //     "Exception Handling",
+  //     "Timeouts",
+  //     "Analytic Reporting",
+  //     "Resilience",
+  //     "Security",
+  //   ],
+  // },
+  // {
+  //   title: "M121: MongoDB Aggregation Framework",
+  //   date: "Not Finished",
+  //   contentColor: "green",
+  //   content: [
+  //     "Projection",
+  //     "Utility Stages",
+  //     "Multidimensional Grouping",
+  //     "Aggregation Performance",
+  //     "Pipeline Optimization",
+  //   ],
+  // },
   {
     title: "M103: MongoDB Cluster Administration",
     date: "Not Finished",
@@ -104,6 +104,23 @@ const awards = [
       "Redux",
     ],
   },
+  {
+    title: "Udemy JavaScript Mastery Course",
+    date: "June 2020",
+    contentColor: "yellow",
+    // description:
+    //   "In this course, I learned all about coding principles and how JavaScript works. I completed this course in June of 2020, but I didn't claim the certificate until May of 2021.",
+    content: [
+      "JavaScript Fundamentals",
+      "DOM Manipulation",
+      "Events",
+      "Data Structures",
+      "OOP",
+      "Async/Await",
+      "APIs",
+      "Git",
+    ],
+  },
 ];
 
 export default function Awards() {
@@ -137,6 +154,7 @@ export default function Awards() {
                 {skill}
               </Badge>
             ))}
+            {award.description && <Text pt="10px">{award.description}</Text>}
           </Box>
         ))}
       </main>
