@@ -121,6 +121,47 @@ const awards = [
       "Git",
     ],
   },
+  {
+    title: "Introduction to Computer Science and Programming in Python (MIT)",
+    date: "May 2020",
+    contentColor: "orange",
+    content: [
+      "Data Structures",
+      "Algorithms",
+      "Abstraction",
+      "Recursion",
+      "Debugging",
+      "OOP",
+      "Inhertiance",
+      "Efficiency",
+    ],
+  },
+  {
+    title: "CS50 (Harvard)",
+    date: "May 2020",
+    contentColor: "red",
+    content: [
+      "C",
+      "Python",
+      "SQL",
+      "Memory Management",
+      "Data Structures",
+      "Algorithms",
+    ],
+  },
+  {
+    title: "Python Specialization (University of Michigan)",
+    date: "April 2020",
+    contentColor: "facebook",
+    content: [
+      "Coding Principles",
+      "Python Basics",
+      "Data Structures",
+      "Web Scraping",
+      "Databases",
+      "Data Visualization",
+    ],
+  },
 ];
 
 export default function Awards() {
