@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Box, Heading, Text, Badge } from "@chakra-ui/react";
+import { Box, Heading, Text, Badge, Flex } from "@chakra-ui/react";
 import Title from "../components/Title";
 
 const projects = [
@@ -13,7 +13,7 @@ const projects = [
     image: {
       src: "/statboard.png",
       width: "1050px",
-      height: "705px",
+      height: "669px",
     },
     story:
       "I built this application to boost my productivity and gain insight into my goals. I wanted a way to track how well I was doing over time, and learn some useful technologies along the way.",
@@ -27,7 +27,7 @@ const projects = [
     image: {
       src: "/feed.png",
       width: "1059px",
-      height: "931px",
+      height: "889px",
     },
     story:
       "This was my first TypeScript and Chakra UI experience. I learned a lot about both of these technologies through the creation of this project and its features. In order to create a truly customizable feed, I had to become efficient at consuming APIs. While creating the infinite scrolling feature, I learned about optimizing components for performance and compatibility.",
@@ -41,7 +41,7 @@ const projects = [
     image: {
       src: "/dyftd.png",
       width: "1077px",
-      height: "803px",
+      height: "769px",
     },
     story:
       "My first experience with the MERN(T) Stack. User Experience was my main goal in mind, so I  made the application as smooth as possible with clean animations and consistency. After getting one of my MongoDB certificates, I reimplemented and restructured the backend for scalability. This project was originially built with Create React App (Express + Node), but was migrated to Next.js (Serverless).",
@@ -64,6 +64,43 @@ const projects = [
     tech: ["Node.js", "Express.js", "Puppeteer", "Discord.js"],
   },
 ];
+
+const ProjectImage = ({ project }) => {
+  return (
+    <Box
+      my="30px"
+      cursor="pointer"
+      _hover={{ transform: "scale(1.03)" }}
+      transition={"all 250ms"}
+    >
+      {project.image && (
+        <>
+          <Flex bgColor="#e8e8e8" h="30px" align="center" px="12px">
+            {["#ff5f56", "#febc2f", "#28c93f"].map((color) => (
+              <Box
+                key={color}
+                bgColor={color}
+                borderRadius="999px"
+                h="12px"
+                w="12px"
+                mr="6px"
+              ></Box>
+            ))}
+          </Flex>
+          <a href={project.url} target="_blank" rel="noopener noreferrer">
+            <Image
+              src={project.image.src}
+              alt={`${project.title} demo`}
+              width={project.image.width}
+              height={project.image.height}
+              quality={100}
+            />
+          </a>
+        </>
+      )}
+    </Box>
+  );
+};
 
 export default function Projects() {
   return (
@@ -97,24 +134,8 @@ export default function Projects() {
               ))}
             </Text>
 
-            <Box
-              my="30px"
-              cursor="pointer"
-              _hover={{ transform: "scale(1.03)" }}
-              transition={"all 250ms"}
-            >
-              {project.image && (
-                <a href={project.url} target="_blank" rel="noopener noreferrer">
-                  <Image
-                    src={project.image.src}
-                    alt={`${project.title} demo`}
-                    width={project.image.width}
-                    height={project.image.height}
-                    quality={100}
-                  />
-                </a>
-              )}
-            </Box>
+            <ProjectImage project={project} />
+
             <Text>{project.story}</Text>
           </Box>
         ))}
