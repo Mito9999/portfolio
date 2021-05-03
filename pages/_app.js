@@ -65,7 +65,7 @@ function MyApp({ Component, pageProps }) {
                     Awards
                   </Button>
                 </Link>
-                <Link href="/services">
+                {/* <Link href="/services">
                   <Button
                     variant="link"
                     color="black"
@@ -74,7 +74,7 @@ function MyApp({ Component, pageProps }) {
                   >
                     Services
                   </Button>
-                </Link>
+                </Link> */}
                 <Link href="/contact">
                   <Button
                     colorScheme="blue"

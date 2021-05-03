@@ -59,6 +59,19 @@ const awards = [
     ],
   },
   {
+    title: "Understanding Typescript Udemy Course",
+    date: "Not Finished",
+    contentColor: "blue",
+    content: [
+      "Types",
+      "Generics",
+      "Decorators",
+      "Namespaces",
+      "React.js",
+      "Node.js",
+    ],
+  },
+  {
     title: "M001: MongoDB Basics",
     date: "March 2021",
     contentColor: "green",
@@ -105,7 +118,7 @@ const awards = [
     ],
   },
   {
-    title: "Udemy JavaScript Mastery Course",
+    title: "JavaScript Mastery Udemy Course",
     date: "June 2020",
     contentColor: "yellow",
     // description:
