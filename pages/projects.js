@@ -1,12 +1,22 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Box, Heading, Text, Badge, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Badge,
+  Flex,
+  Button,
+  Link as ChakraLink,
+} from "@chakra-ui/react";
 import Title from "../components/Title";
+import { SiGithub } from "react-icons/si";
 
 const projects = [
   {
     id: 1,
     title: "Statboard",
+    code: "https://github.com/Mito9999/statboard",
     url: "https://statboard.vercel.app/",
     description:
       "The one place to view all of your information from various sources!",
@@ -22,6 +32,7 @@ const projects = [
   {
     id: 2,
     title: "Feed",
+    code: "https://github.com/Mito9999/feed",
     url: "https://my-feed.netlify.app/",
     description: "A customizable display of your most important media.",
     image: {
@@ -36,6 +47,7 @@ const projects = [
   {
     id: 3,
     title: "Dyftd",
+    code: "https://github.com/Mito9999/dyftd",
     url: "https://dyftd.vercel.app/",
     description: "Did you feed the dog? Collaborative toggles.",
     image: {
@@ -50,6 +62,7 @@ const projects = [
   {
     id: 4,
     title: "Money Tracker",
+    code: "https://github.com/Mito9999/moneytracker",
     description: "An easy way to visualize your spending and savings habits!",
     story:
       "I have always been careful with money. However, this project made me see some of the areas that I could improve in, by visualizing every dollar that comes in and goes out.",
@@ -58,6 +71,7 @@ const projects = [
   {
     id: 5,
     title: "Cars",
+    code: "https://github.com/Mito9999/cars",
     description: "A simple API for finding great deals on cars.",
     story:
       "In search of finding a good deal on a used car, I created this API + Discord Bot which gathers car deals from Craigslist and sends a message of new listings.",
@@ -124,15 +138,34 @@ export default function Projects() {
                 : "none"
             }
           >
-            <Heading size="md">{project.title}</Heading>
-            <Text>{project.description}</Text>
-            <Text>
-              {project.tech.map((technology) => (
-                <Badge colorScheme="blue" mr="10px" key={technology}>
-                  {technology}
-                </Badge>
-              ))}
-            </Text>
+            <Flex
+              direction={["column", "row"]}
+              justify="space-between"
+              align={["initial", "center"]}
+            >
+              <Box>
+                <Heading size="md">{project.title}</Heading>
+                <Text>{project.description}</Text>
+                <Text>
+                  {project.tech.map((technology) => (
+                    <Badge colorScheme="blue" mr="10px" key={technology}>
+                      {technology}
+                    </Badge>
+                  ))}
+                </Text>
+              </Box>
+              <ChakraLink
+                href={project.code}
+                target="_blank"
+                rel="noopener noreferrer"
+                ml={["0px", "20px"]}
+                mt={["20px", "0px"]}
+              >
+                <Button variant="outline" leftIcon={<SiGithub />}>
+                  Code
+                </Button>
+              </ChakraLink>
+            </Flex>
 
             <ProjectImage project={project} />
 
