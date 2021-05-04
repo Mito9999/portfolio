@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Title from "../components/Title";
 import { SiGithub } from "react-icons/si";
+import { MdPlayArrow } from "react-icons/md";
 
 const projects = [
   {
@@ -139,9 +140,9 @@ export default function Projects() {
             }
           >
             <Flex
-              direction={["column", "row"]}
+              direction={["column", "column", "row"]}
               justify="space-between"
-              align={["initial", "center"]}
+              align={["initial", "initial", "center"]}
             >
               <Box>
                 <Heading size="md">{project.title}</Heading>
@@ -154,17 +155,38 @@ export default function Projects() {
                   ))}
                 </Text>
               </Box>
-              <ChakraLink
-                href={project.code}
-                target="_blank"
-                rel="noopener noreferrer"
-                ml={["0px", "20px"]}
-                mt={["20px", "0px"]}
+              <Flex
+                align="center"
+                ml={["0px", "0px", "20px"]}
+                mt={["20px", "20px", "0px"]}
               >
-                <Button variant="outline" leftIcon={<SiGithub />}>
-                  Code
-                </Button>
-              </ChakraLink>
+                {project.url && (
+                  <ChakraLink
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    mr="4px"
+                  >
+                    <Button
+                      variant="outline"
+                      leftIcon={<MdPlayArrow />}
+                      my="8px"
+                    >
+                      Demo
+                    </Button>
+                  </ChakraLink>
+                )}
+                <ChakraLink
+                  href={project.code}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  // ml="20px"
+                >
+                  <Button variant="outline" leftIcon={<SiGithub />} my="8px">
+                    Code
+                  </Button>
+                </ChakraLink>
+              </Flex>
             </Flex>
 
             <ProjectImage project={project} />
