@@ -97,8 +97,7 @@ const fetchDiscord = async () => {
       {
         method: "GET",
         headers: {
-          Authorization:
-            "Bot ODQzNTkyMjczNDUxNDE3NjQx.YKGGhw.k6T7554zT3AN3O3gOUqD5oLeG1g",
+          Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
         },
       }
     );
