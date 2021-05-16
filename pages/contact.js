@@ -3,28 +3,23 @@ import { Flex, Text, Link as ChakraLink } from "@chakra-ui/react";
 import { FaGithub, FaEnvelope, FaDiscord } from "react-icons/fa";
 import Title from "../components/Title";
 
-const contactInfo = [
-  {
-    text: "GitHub",
-    account: "Mito9999",
-    link: "https://github.com/Mito9999",
-    Icon: FaGithub,
-  },
-  {
-    text: "Discord",
-    account: "Mito#9999",
-    link: "https://discord.com/users/570383339811504159",
-    Icon: FaDiscord,
-  },
-  {
-    text: "Email",
-    account: "mitomandev@gmail.com",
-    link: "mailto:mitomandev@gmail.com",
-    Icon: FaEnvelope,
-  },
-];
+const bindIcon = (source) => {
+  switch (source) {
+    case "GitHub":
+      return FaGithub;
+    case "Email":
+      return FaEnvelope;
+    case "Discord":
+      return FaDiscord;
+  }
+};
 
-export default function Contact() {
+export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
+  const contactInfo = contactInfoWithoutIcons.map((source) => ({
+    ...source,
+    Icon: bindIcon(source.text),
+  }));
+
   return (
     <>
       <Head>
@@ -79,4 +74,51 @@ export default function Contact() {
       </main>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const contactInfo = [
+    {
+      text: "GitHub",
+      account: "Mito9999",
+      link: "https://github.com/Mito9999",
+    },
+  ];
+
+  const discordRes = await fetch(
+    "https://discord.com/api/v8/users/570383339811504159",
+    {
+      method: "GET",
+      headers: {
+        Authorization:
+          "Bot ODQzNTkyMjczNDUxNDE3NjQx.YKGGhw.k6T7554zT3AN3O3gOUqD5oLeG1g",
+      },
+    }
+  );
+  const discordData = await discordRes.json();
+  const { username: discordUsername, discriminator: discordDiscriminator } =
+    discordData;
+
+  let discordAccount = "Mito#9999";
+  if (discordUsername && discordDiscriminator) {
+    const possibleDiscordAccount = `${discordUsername}#${discordDiscriminator}`;
+    if (/\w+#\d{4}/.test(possibleDiscordAccount)) {
+      discordAccount = possibleDiscordAccount;
+    }
+  }
+
+  contactInfo.push({
+    text: "Discord",
+    account: discordAccount,
+    link: "https://discord.com/users/570383339811504159",
+  });
+
+  contactInfo.push({
+    text: "Email",
+    account: "mitomandev@gmail.com",
+    link: "mailto:mitomandev@gmail.com",
+  });
+  return {
+    props: { contactInfo: contactInfo },
+  };
 }
