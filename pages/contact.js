@@ -76,37 +76,57 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
   );
 }
 
-export async function getStaticProps() {
-  const contactInfo = [
-    {
-      text: "GitHub",
-      account: "Mito9999",
-      link: "https://github.com/Mito9999",
-    },
-  ];
+const fetchGitHub = async () => {
+  try {
+    const res = await fetch("https://api.github.com/user/58613559");
+    const { login: username } = await res.json();
 
-  const discordRes = await fetch(
-    "https://discord.com/api/v8/users/570383339811504159",
-    {
-      method: "GET",
-      headers: {
-        Authorization:
-          "Bot ODQzNTkyMjczNDUxNDE3NjQx.YKGGhw.k6T7554zT3AN3O3gOUqD5oLeG1g",
-      },
+    if (username) {
+      return username;
     }
-  );
-  const discordData = await discordRes.json();
-  const { username: discordUsername, discriminator: discordDiscriminator } =
-    discordData;
-
-  let discordAccount = "Mito#9999";
-  if (discordUsername && discordDiscriminator) {
-    const possibleDiscordAccount = `${discordUsername}#${discordDiscriminator}`;
-    if (/\w+#\d{4}/.test(possibleDiscordAccount)) {
-      discordAccount = possibleDiscordAccount;
-    }
+    return "Mito9999";
+  } catch {
+    return "Mito9999";
   }
+};
 
+const fetchDiscord = async () => {
+  try {
+    const res = await fetch(
+      "https://discord.com/api/v8/users/570383339811504159",
+      {
+        method: "GET",
+        headers: {
+          Authorization:
+            "Bot ODQzNTkyMjczNDUxNDE3NjQx.YKGGhw.k6T7554zT3AN3O3gOUqD5oLeG1g",
+        },
+      }
+    );
+    const { username, discriminator } = await res.json();
+
+    if (username && discriminator) {
+      const possibleDiscordAccount = `${username}#${discriminator}`;
+      if (/\w+#\d{4}/.test(possibleDiscordAccount)) {
+        return possibleDiscordAccount;
+      }
+    }
+    return "Mito#9999";
+  } catch {
+    return "Mito#9999";
+  }
+};
+
+export async function getStaticProps() {
+  const contactInfo = [];
+
+  const githubAccount = await fetchGitHub();
+  contactInfo.push({
+    text: "GitHub",
+    account: githubAccount,
+    link: `https://github.com/${githubAccount}`,
+  });
+
+  const discordAccount = await fetchDiscord();
   contactInfo.push({
     text: "Discord",
     account: discordAccount,
