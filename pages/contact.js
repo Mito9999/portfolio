@@ -92,12 +92,13 @@ const fetchGitHub = async () => {
 
 const fetchDiscord = async () => {
   try {
+    const discordBotToken = process.env.DISCORD_BOT_TOKEN; // token has <###> in a few places to avoid discord token detection
     const res = await fetch(
       "https://discord.com/api/v8/users/570383339811504159",
       {
         method: "GET",
         headers: {
-          Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
+          Authorization: `Bot ${discordBotToken.replace(/<###>/g, "")}`,
         },
       }
     );
