@@ -44,9 +44,7 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
             _hover={[{}, { fontSize: "20px" }, { fontSize: "28px" }]}
             transition="all 250ms ease"
           >
-            <ChakraLink href={source.link} isExternal={source.text !== "Email"}>
-              <source.Icon fontSize="50px" />
-            </ChakraLink>
+            <source.Icon fontSize="50px" />
             <Flex
               direction={["column", "row"]}
               align="center"
