@@ -26,6 +26,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
+        <meta
+          name="description"
+          content="A quick overview of Mito's projects, skills, awards, and info!"
+        />
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -77,7 +81,7 @@ function MyApp({ Component, pageProps }) {
                 </Link> */}
                 <Link href="/contact">
                   <Button
-                    colorScheme="blue"
+                    colorScheme="gray"
                     ml={["2", "2", "4"]}
                     mr={["2", "2", "0"]}
                     my="2"

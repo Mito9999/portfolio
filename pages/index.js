@@ -153,9 +153,9 @@ export default function Home() {
               </Heading>
               <Text>
                 Most Recent Actions{" "}
-                <span style={{ color: "rgb(200, 210, 215)" }}>
+                <Text as="span" color="rgb(140, 150, 155)">
                   / {stats.repos} repos
-                </span>
+                </Text>
               </Text>
             </Box>
             {stats.githubData.length > 0 ? (
@@ -207,9 +207,9 @@ export default function Home() {
               </Heading>
               <Text>
                 Most Recent Tests{" "}
-                <span style={{ color: "rgb(200, 210, 215)" }}>
+                <Text as="span" color="rgb(140, 150, 155)">
                   / {stats.typingData.testsTaken}
-                </span>
+                </Text>
               </Text>
             </Box>
             {stats.typingData.scores.length > 0 ? (
