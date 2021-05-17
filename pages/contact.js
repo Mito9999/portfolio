@@ -1,6 +1,15 @@
+import {
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Link as ChakraLink,
+  Text,
+  Textarea,
+  Button,
+} from "@chakra-ui/react";
 import Head from "next/head";
-import { Flex, Text, Link as ChakraLink } from "@chakra-ui/react";
-import { FaGithub, FaEnvelope, FaDiscord } from "react-icons/fa";
+import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
 import Title from "../components/Title";
 
 const bindIcon = (source) => {
@@ -36,11 +45,7 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
             align="center"
             py="20px"
             mb="5px"
-            borderBottom={
-              contactInfo[contactInfo.length - 1] !== source
-                ? "3px dashed rgb(200, 210, 215)"
-                : "none"
-            }
+            borderBottom="3px dashed rgb(200, 210, 215)"
             _hover={[{}, { fontSize: "20px" }, { fontSize: "28px" }]}
             transition="all 250ms ease"
           >
@@ -69,6 +74,29 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
             </Flex>
           </Flex>
         ))}
+        <form style={{ marginTop: "40px", marginBottom: "20px" }}>
+          <Flex direction={["column", "row"]}>
+            <FormControl mr={["0", "2"]}>
+              <FormLabel>Name</FormLabel>
+              <Input type="text" placeholder="Your Name" />
+            </FormControl>
+            <FormControl mt={["4", "0"]} ml={["0", "2"]}>
+              <FormLabel>Email</FormLabel>
+              <Input type="text" placeholder="example@example.com" />
+            </FormControl>
+          </Flex>
+          <FormControl mt="4">
+            <FormLabel>Subject</FormLabel>
+            <Input type="text" />
+          </FormControl>
+          <FormControl mt="4">
+            <FormLabel>Message</FormLabel>
+            <Textarea />
+          </FormControl>
+          <Button mt="4" w="100%" colorScheme="red">
+            Send
+          </Button>
+        </form>
       </main>
     </>
   );
