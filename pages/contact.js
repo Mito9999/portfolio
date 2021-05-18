@@ -1,18 +1,19 @@
 import {
+  Button,
   Flex,
   FormControl,
+  FormHelperText,
   FormLabel,
   Input,
   Link as ChakraLink,
   Text,
   Textarea,
-  Button,
   useToast,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import { useState } from "react";
 import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
 import Title from "../components/Title";
-import { useState } from "react";
 
 const bindIcon = (source) => {
   switch (source) {
@@ -41,13 +42,40 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+
+    if (name !== "message" || (name === "message" && value.length <= 500)) {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async () => {
+    // if a field is empty or all fields combine to be over 1000 characters, no request is sent.
+    const formDataTexts = Object.values(formData);
+
+    if (formDataTexts.includes("")) {
+      toast({
+        title: "Empty field(s)!",
+        description: "All fields are required",
+        status: "warning",
+        isClosable: true,
+        duration: 10000,
+      });
+      return;
+    }
+    if (formDataTexts.reduce((prev, cur) => prev + cur.length, 0) > 1000) {
+      toast({
+        title: "Character limit exceeded",
+        description: "Please keep submissions under 1000 characters",
+        status: "warning",
+        isClosable: true,
+        duration: 10000,
+      });
+      return;
+    }
+
     const res = await fetch("/api/message", {
       method: "POST",
       headers: {
@@ -167,6 +195,11 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
               value={formData.message}
               onChange={handleChange}
             />
+            <FormHelperText
+              color={formData.message.length >= 500 ? "red.500" : "gray.500"}
+            >
+              {formData.message.length}/500 characters
+            </FormHelperText>
           </FormControl>
           <Button mt="4" w="100%" colorScheme="red" onClick={handleSubmit}>
             Send
