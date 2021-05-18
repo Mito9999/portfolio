@@ -106,12 +106,18 @@ const ProjectImage = ({ project }) => {
             ))}
           </Flex>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
-            <Skeleton isLoaded={isImageLoaded}>
+            <Skeleton
+              isLoaded={isImageLoaded}
+              height={
+                968 *
+                  (Number(project.image.height.replace("px", "")) /
+                    Number(project.image.width.replace("px", ""))) +
+                "px"
+              }
+            >
               <ChakraImage
                 src={project.image.src}
                 alt={`${project.title} demo`}
-                width={project.image.width}
-                height={project.image.height}
                 onLoad={() => setIsImageLoaded(true)}
               />
             </Skeleton>
