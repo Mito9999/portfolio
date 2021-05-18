@@ -7,6 +7,7 @@ import {
   Text,
   Textarea,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
@@ -25,6 +26,12 @@ const bindIcon = (source) => {
 };
 
 export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
+  const toast = useToast();
+  const contactInfo = contactInfoWithoutIcons.map((source) => ({
+    ...source,
+    Icon: bindIcon(source.text),
+  }));
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,12 +55,27 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
       },
       body: JSON.stringify(formData),
     });
-  };
 
-  const contactInfo = contactInfoWithoutIcons.map((source) => ({
-    ...source,
-    Icon: bindIcon(source.text),
-  }));
+    if (res.ok) {
+      toast({
+        title: "Message sent successfully!",
+        description:
+          "Your message has been received and will be reviewed shortly",
+        status: "success",
+        isClosable: true,
+        duration: 10000,
+      });
+    } else {
+      toast({
+        title: "Failed to send message!",
+        description:
+          "An unexpected error has occurred, please try another contact method",
+        status: "error",
+        isClosable: true,
+        duration: 10000,
+      });
+    }
+  };
 
   return (
     <>
