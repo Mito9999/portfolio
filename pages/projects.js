@@ -84,6 +84,7 @@ const projects = [
 
 const ProjectImage = ({ project }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+
   return (
     <Box
       my="30px"
@@ -99,8 +100,8 @@ const ProjectImage = ({ project }) => {
                 key={color}
                 bgColor={color}
                 borderRadius="999px"
-                h="12px"
-                w="12px"
+                h={["9px", "12px"]}
+                w={["9px", "12px"]}
                 mr="6px"
               ></Box>
             ))}
@@ -108,12 +109,12 @@ const ProjectImage = ({ project }) => {
           <a href={project.url} target="_blank" rel="noopener noreferrer">
             <Skeleton
               isLoaded={isImageLoaded}
-              height={
-                968 *
-                  (Number(project.image.height.replace("px", "")) /
-                    Number(project.image.width.replace("px", ""))) +
-                "px"
-              }
+              h="0"
+              pb={(() => {
+                const h = Number(project.image.height.replace("px", ""));
+                const w = Number(project.image.width.replace("px", ""));
+                return 100 * (h / w) + "%";
+              })()}
             >
               <ChakraImage
                 src={project.image.src}
