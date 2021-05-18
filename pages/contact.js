@@ -40,6 +40,8 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
     }));
   };
 
+  const handleSubmit = () => {};
+
   console.log(formData);
 
   const contactInfo = contactInfoWithoutIcons.map((source) => ({

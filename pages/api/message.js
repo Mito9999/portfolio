@@ -1,53 +1,52 @@
 import Discord from "discord.js";
 const client = new Discord.Client();
 
-let isReady = false;
 let channel;
+let isReady = false;
 client.on("ready", () => {
-  isReady = true;
   channel = client.channels.cache.get("820419455405260830");
+  isReady = true;
 });
 
-client.login("ODQzNTkyMjczNDUxNDE3NjQx.YKGGhw.HX4ADGByOp9MXCHzoxRkqSJYMHQ");
+client.login(process.env.DISCORD_BOT_TOKEN.replace(/<###>/g, ""));
 
 export default async function handler(req, res) {
-  const main = () => {
-    try {
-      const exampleEmbed = new Discord.MessageEmbed()
-        .setColor("#0099ff")
-        .setTitle("Test")
-        .setURL("https://mito9999.vercel.app/contact")
-        .addFields(
-          { name: "Name", value: "John Smith" },
-          { name: "Email", value: "test@gmail.com" },
-          { name: "Subject", value: "React.js Project Inquiry" },
-          {
-            name: "Message",
-            value:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pretium, lectus at hendrerit rhoncus, turpis lacus lacinia elit, quis accumsan justo erat lacinia orci. Nullam pellentesque mi ut lectus laoreet interdum. Vivamus nibh odio, aliquam eget feugiat ut, mollis in ligula. Fusce pharetra purus rutrum turpis viverra auctor. Suspendisse vitae leo non nulla hendrerit molestie eu vestibulum eros. Nulla in volutpat lectus. Suspendisse potenti. Nulla dictum tellus vel lorem consequat ornare. Donec vitae efficitur diam, at aliquet nunc.",
-          }
-        )
-        .setTimestamp(new Date());
+  if (req.method === "POST") {
+    const { name, email, subject, message } = req.body;
+    const main = () => {
+      try {
+        const exampleEmbed = new Discord.MessageEmbed()
+          .setColor("#E53E3E")
+          .setTitle("Contact Form")
+          .setURL("https://mito9999.vercel.app/contact")
+          .addFields(
+            { name: "Name", value: name },
+            { name: "Email", value: email },
+            { name: "Subject", value: subject },
+            { name: "Message", value: message }
+          )
+          .setTimestamp(new Date());
 
-      channel.send(exampleEmbed);
-      res.status(200).json({ msg: "Message Sent." });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json({ msg: "Error" });
-    }
-  };
-
-  let i = 0;
-  if (!isReady) {
-    const checkerId = setInterval(() => {
-      if (isReady) {
-        main();
-        clearInterval(checkerId);
-      } else {
-        i++;
+        channel.send(exampleEmbed);
+        res.status(200).json({ msg: "Message Sent." });
+      } catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: "Error" });
       }
-    }, 250);
-  } else {
-    main();
+    };
+
+    let i = 0;
+    if (!isReady) {
+      const checkerId = setInterval(() => {
+        if (isReady) {
+          main();
+          clearInterval(checkerId);
+        } else {
+          i++;
+        }
+      }, 250);
+    } else {
+      main();
+    }
   }
 }
