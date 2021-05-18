@@ -11,6 +11,7 @@ import {
 import Head from "next/head";
 import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
 import Title from "../components/Title";
+import { useState } from "react";
 
 const bindIcon = (source) => {
   switch (source) {
@@ -24,6 +25,23 @@ const bindIcon = (source) => {
 };
 
 export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  console.log(formData);
+
   const contactInfo = contactInfoWithoutIcons.map((source) => ({
     ...source,
     Icon: bindIcon(source.text),
@@ -74,26 +92,53 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
             </Flex>
           </Flex>
         ))}
-        <form style={{ marginTop: "40px", marginBottom: "20px" }}>
+        <form
+          style={{ marginTop: "40px", marginBottom: "20px" }}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+        >
           <Flex direction={["column", "row"]}>
             <FormControl mr={["0", "2"]}>
               <FormLabel>Name</FormLabel>
-              <Input type="text" placeholder="Your Name" />
+              <Input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your Name"
+              />
             </FormControl>
             <FormControl mt={["4", "0"]} ml={["0", "2"]}>
               <FormLabel>Email</FormLabel>
-              <Input type="text" placeholder="example@example.com" />
+              <Input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="example@example.com"
+              />
             </FormControl>
           </Flex>
           <FormControl mt="4">
             <FormLabel>Subject</FormLabel>
-            <Input type="text" />
+            <Input
+              type="text"
+              name="subject"
+              value={formData.subject}
+              onChange={handleChange}
+            />
           </FormControl>
           <FormControl mt="4">
             <FormLabel>Message</FormLabel>
-            <Textarea />
+            <Textarea
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+            />
           </FormControl>
-          <Button mt="4" w="100%" colorScheme="red">
+          <Button mt="4" w="100%" colorScheme="red" onClick={handleSubmit}>
             Send
           </Button>
         </form>
