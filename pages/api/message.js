@@ -12,9 +12,9 @@ client.login(process.env.DISCORD_BOT_TOKEN.replace(/<###>/g, ""));
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const { name, email, subject, message } = req.body;
     const main = () => {
       try {
+        const { name, email, subject, message } = req.body;
         const exampleEmbed = new Discord.MessageEmbed()
           .setColor("#E53E3E")
           .setTitle("Contact Form")

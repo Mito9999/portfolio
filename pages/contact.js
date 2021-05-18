@@ -40,9 +40,15 @@ export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
     }));
   };
 
-  const handleSubmit = () => {};
-
-  console.log(formData);
+  const handleSubmit = async () => {
+    const res = await fetch("/api/message", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+  };
 
   const contactInfo = contactInfoWithoutIcons.map((source) => ({
     ...source,
