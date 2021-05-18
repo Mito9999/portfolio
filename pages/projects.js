@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import {
   Box,
   Heading,
@@ -8,10 +7,13 @@ import {
   Flex,
   Button,
   Link as ChakraLink,
+  Skeleton,
+  Image as ChakraImage,
 } from "@chakra-ui/react";
 import Title from "../components/Title";
 import { SiGithub } from "react-icons/si";
 import { MdPlayArrow } from "react-icons/md";
+import { useState } from "react";
 
 const projects = [
   {
@@ -81,6 +83,7 @@ const projects = [
 ];
 
 const ProjectImage = ({ project }) => {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
   return (
     <Box
       my="30px"
@@ -103,13 +106,15 @@ const ProjectImage = ({ project }) => {
             ))}
           </Flex>
           <a href={project.url} target="_blank" rel="noopener noreferrer">
-            <Image
-              src={project.image.src}
-              alt={`${project.title} demo`}
-              width={project.image.width}
-              height={project.image.height}
-              quality={100}
-            />
+            <Skeleton isLoaded={isImageLoaded}>
+              <ChakraImage
+                src={project.image.src}
+                alt={`${project.title} demo`}
+                width={project.image.width}
+                height={project.image.height}
+                onLoad={() => setIsImageLoaded(true)}
+              />
+            </Skeleton>
           </a>
         </>
       )}
