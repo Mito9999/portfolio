@@ -4,7 +4,7 @@ const client = new Discord.Client();
 let channel;
 let isReady = false;
 client.on("ready", () => {
-  channel = client.channels.cache.get("820419455405260830");
+  channel = client.channels.cache.get("844015688083701770");
   isReady = true;
 });
 
@@ -38,6 +38,7 @@ export default async function handler(req, res) {
     let i = 0;
     if (!isReady) {
       const checkerId = setInterval(() => {
+        if (i >= 120) return; // Will try for 30 seconds
         if (isReady) {
           main();
           clearInterval(checkerId);
