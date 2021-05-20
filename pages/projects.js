@@ -94,7 +94,12 @@ const ProjectImage = ({ project }) => {
     >
       {project.image && (
         <>
-          <Flex bgColor="#e8e8e8" h="30px" align="center" px="12px">
+          <Flex
+            bgColor="#e8e8e8"
+            h={["22.5px", "30px"]}
+            align="center"
+            px="12px"
+          >
             {["#ff5f56", "#febc2f", "#28c93f"].map((color) => (
               <Box
                 key={color}
