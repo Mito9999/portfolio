@@ -1,53 +1,41 @@
-import Discord from "discord.js";
-const client = new Discord.Client();
+import axios from "axios";
 
-let channel;
-let isReady = false;
-client.on("ready", () => {
-  channel = client.channels.cache.get("844015688083701770");
-  isReady = true;
-});
-
-client.login(process.env.DISCORD_BOT_TOKEN.replace(/<###>/g, ""));
-
+const discordWebookUrl =
+  "https://discord.com/api/webhooks/845393858006876200/2vzH-gltHQG67dwlDddIp5yDRoVphtySVR02tsLtDiq63fBuFgeckZGL7mLLeacw7y8C";
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    const main = () => {
-      try {
-        const { name, email, subject, message } = req.body;
-        const exampleEmbed = new Discord.MessageEmbed()
-          .setColor("#E53E3E")
-          .setTitle("Contact Form")
-          .setURL("https://mito9999.vercel.app/contact")
-          .addFields(
-            { name: "Name", value: name },
-            { name: "Email", value: email },
-            { name: "Subject", value: subject },
-            { name: "Message", value: message }
-          )
-          .setTimestamp(new Date());
+    try {
+      const now = new Date();
+      const { name, email, subject, message } = req.body;
+      const discordEmbed = {
+        username: "mito9999",
+        avatar_url: "https://avatars.githubusercontent.com/u/58613559",
+        content: "<@570383339811504159>",
+        embeds: [
+          {
+            title: "Contact Form",
+            url: "https://mito9999.vercel.app/contact",
+            color: 15548997,
+            fields: [
+              { name: "Name", value: name, inline: true },
+              { name: "Email", value: email, inline: true },
+              { name: "Subject", value: subject },
+              { name: "Message", value: message },
+            ],
+            footer: {
+              text:
+                now.toLocaleDateString() + " at " + now.toLocaleTimeString(),
+            },
+          },
+        ],
+      };
 
-        channel.send(exampleEmbed);
-        res.status(200).json({ msg: "Message Sent." });
-      } catch (err) {
-        console.log(err);
-        res.status(500).json({ msg: "Error" });
-      }
-    };
+      await axios.post(discordWebookUrl, discordEmbed);
 
-    let i = 0;
-    if (!isReady) {
-      const checkerId = setInterval(() => {
-        if (i >= 120) return; // Will try for 30 seconds
-        if (isReady) {
-          main();
-          clearInterval(checkerId);
-        } else {
-          i++;
-        }
-      }, 250);
-    } else {
-      main();
+      res.status(200).json({ msg: "Message Sent." });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err });
     }
   }
 }
