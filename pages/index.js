@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Title from "../components/Title";
 import { useState, useEffect } from "react";
+import useView from "../hooks/useView";
 
 const numberToOrdinal = (number) => {
   const ordinalRules = new Intl.PluralRules("en", {
@@ -76,6 +77,7 @@ const skills = [
 
 // TODO: make custom pages for each github repo/commit
 export default function Home() {
+  useView("/");
   const [stats, setStats] = useState({
     isCached: false,
     repos: 17,

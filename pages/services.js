@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Box, Text, Heading } from "@chakra-ui/react";
 import Title from "../components/Title";
+import useView from "../hooks/useView";
 
 const servicesList = [
   {
@@ -36,6 +37,7 @@ const servicesList = [
 ];
 
 export default function Services() {
+  useView("/services");
   return (
     <>
       <Head>

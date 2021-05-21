@@ -14,6 +14,7 @@ import Title from "../components/Title";
 import { SiGithub } from "react-icons/si";
 import { MdPlayArrow } from "react-icons/md";
 import { useState } from "react";
+import useView from "../hooks/useView";
 
 const projects = [
   {
@@ -135,6 +136,7 @@ const ProjectImage = ({ project }) => {
 };
 
 export default function Projects() {
+  useView("/projects");
   return (
     <>
       <Head>

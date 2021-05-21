@@ -14,6 +14,7 @@ import Head from "next/head";
 import { useState } from "react";
 import { FaDiscord, FaEnvelope, FaGithub } from "react-icons/fa";
 import Title from "../components/Title";
+import useView from "../hooks/useView";
 
 const bindIcon = (source) => {
   switch (source) {
@@ -27,6 +28,7 @@ const bindIcon = (source) => {
 };
 
 export default function Contact({ contactInfo: contactInfoWithoutIcons }) {
+  useView("/contact");
   const toast = useToast();
   const contactInfo = contactInfoWithoutIcons.map((source) => ({
     ...source,

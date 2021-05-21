@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { Box, Heading, Badge, Text } from "@chakra-ui/react";
 import Title from "../components/Title";
+import useView from "../hooks/useView";
 
 const awards = [
   // {
@@ -178,6 +179,7 @@ const awards = [
 ];
 
 export default function Awards() {
+  useView("/awards");
   return (
     <>
       <Head>
