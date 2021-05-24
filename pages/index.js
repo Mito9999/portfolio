@@ -63,137 +63,141 @@ export default function Home() {
       </Head>
 
       <main>
-        <Title text="About Me" />
-        <Text mb="25px" textAlign={["left", "justify"]}>
-          {bio}
-        </Text>
-        <Title text="Skills" />
-        <Flex justify="space-between" wrap="wrap" fontSize="100px">
-          {skills.map((skill) => (
-            <Flex
-              direction="column"
-              key={skill.title}
-              _hover={{ transform: "scale(1.08)" }}
-              transition="transform 200ms"
-            >
-              <Badge colorScheme={skill.color} textAlign="center" mx="4px">
-                {skill.title}
-              </Badge>
-              <Box fontSize="100px">
-                <i className={skill.iconClass}></i>
+        <Box minH="calc(100vh - 136px)">
+          <Title text="About Me" />
+          <Text mb="25px" textAlign={["left", "justify"]}>
+            {bio}
+          </Text>
+          <Title text="Skills" />
+          <Flex justify="space-between" wrap="wrap" fontSize="100px">
+            {skills.map((skill) => (
+              <Flex
+                direction="column"
+                key={skill.title}
+                _hover={{ transform: "scale(1.08)" }}
+                transition="transform 200ms"
+              >
+                <Badge colorScheme={skill.color} textAlign="center" mx="4px">
+                  {skill.title}
+                </Badge>
+                <Box fontSize="100px">
+                  <i className={skill.iconClass}></i>
+                </Box>
+              </Flex>
+            ))}
+          </Flex>
+        </Box>
+
+        <Box minH="calc(100vh - 36px)">
+          <Title text="Personal Dashboard" />
+
+          <Grid
+            templateColumns={"repeat(auto-fit, minmax(325px, 1fr))"}
+            gap="20px"
+            mb="30px"
+          >
+            <Box>
+              <Box borderLeft="3px solid" pl="9px" borderColor="blue.500">
+                <Heading size="md" as="h3">
+                  <ChakraLink href="https://github.com/Mito9999" isExternal>
+                    GitHub
+                  </ChakraLink>
+                </Heading>
+                <Text>
+                  Most Recent Actions{" "}
+                  <Text as="span" color="rgb(140, 150, 155)">
+                    / {stats.repos} repos
+                  </Text>
+                </Text>
               </Box>
-            </Flex>
-          ))}
-        </Flex>
-
-        <Title text="Personal Dashboard" />
-
-        <Grid
-          templateColumns={"repeat(auto-fit, minmax(325px, 1fr))"}
-          gap="20px"
-          mb="30px"
-        >
-          <Box>
-            <Box borderLeft="3px solid" pl="9px" borderColor="blue.500">
-              <Heading size="md" as="h3">
-                <ChakraLink href="https://github.com/Mito9999" isExternal>
-                  GitHub
-                </ChakraLink>
-              </Heading>
-              <Text>
-                Most Recent Actions{" "}
-                <Text as="span" color="rgb(140, 150, 155)">
-                  / {stats.repos} repos
-                </Text>
-              </Text>
+              {stats.githubData.length > 0 ? (
+                stats.githubData.map((event, idx) => (
+                  <Box
+                    key={event.id}
+                    my="15px"
+                    py="15px"
+                    borderBottom={
+                      idx < stats.githubData.length - 1
+                        ? "3px dashed rgb(234, 240, 245)"
+                        : "none"
+                    }
+                  >
+                    <Heading size="sm" as="h4">
+                      <Link
+                        href={`https://github.com/Mito9999/${
+                          event.repo.name.split("/")[1]
+                        }/commit/${event.payload.commits[0].sha}`}
+                      >
+                        {event.repo.name}
+                      </Link>
+                    </Heading>
+                    <Text>{event.payload.commits[0].message}</Text>
+                    <Text>
+                      {new Date(event.created_at).toLocaleString("en-US", {
+                        month: "numeric",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                      })}
+                    </Text>
+                  </Box>
+                ))
+              ) : (
+                <Spinner size="lg" mt="10px" />
+              )}
             </Box>
-            {stats.githubData.length > 0 ? (
-              stats.githubData.map((event, idx) => (
-                <Box
-                  key={event.id}
-                  my="15px"
-                  py="15px"
-                  borderBottom={
-                    idx < stats.githubData.length - 1
-                      ? "3px dashed rgb(234, 240, 245)"
-                      : "none"
-                  }
-                >
-                  <Heading size="sm" as="h4">
-                    <Link
-                      href={`https://github.com/Mito9999/${
-                        event.repo.name.split("/")[1]
-                      }/commit/${event.payload.commits[0].sha}`}
-                    >
-                      {event.repo.name}
-                    </Link>
-                  </Heading>
-                  <Text>{event.payload.commits[0].message}</Text>
-                  <Text>
-                    {new Date(event.created_at).toLocaleString("en-US", {
-                      month: "numeric",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
-                    })}
-                  </Text>
-                </Box>
-              ))
-            ) : (
-              <Spinner size="lg" mt="10px" />
-            )}
-          </Box>
 
-          <Box>
-            <Box borderLeft="3px solid" pl="9px" borderColor="blue.500">
-              <Heading size="md" as="h3">
-                <ChakraLink
-                  href="https://10fastfingers.com/user/2069581/"
-                  isExternal
-                >
-                  Typing
-                </ChakraLink>
-              </Heading>
-              <Text>
-                Most Recent Tests{" "}
-                <Text as="span" color="rgb(140, 150, 155)">
-                  / {stats.typingData.testsTaken}
+            <Box>
+              <Box borderLeft="3px solid" pl="9px" borderColor="blue.500">
+                <Heading size="md" as="h3">
+                  <ChakraLink
+                    href="https://10fastfingers.com/user/2069581/"
+                    isExternal
+                  >
+                    Typing
+                  </ChakraLink>
+                </Heading>
+                <Text>
+                  Most Recent Tests{" "}
+                  <Text as="span" color="rgb(140, 150, 155)">
+                    / {stats.typingData.testsTaken}
+                  </Text>
                 </Text>
-              </Text>
+              </Box>
+              {stats.typingData.scores.length > 0 ? (
+                stats.typingData.scores.map((score, idx) => (
+                  <Box
+                    key={score.date}
+                    my="15px"
+                    py="15px"
+                    borderBottom={
+                      idx < stats.typingData.scores.length - 1
+                        ? "3px dashed rgb(234, 240, 245)"
+                        : "none"
+                    }
+                  >
+                    <Heading size="sm" as="h4">
+                      {numberToOrdinal(stats.typingData.testsTaken - idx)} Test
+                    </Heading>
+                    <Text>
+                      {score.wpm} WPM &amp; {score.mistakes} Mistakes
+                    </Text>
+                    <Text>
+                      {new Date(score.date).toLocaleString("en-US", {
+                        month: "numeric",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                      })}
+                    </Text>
+                  </Box>
+                ))
+              ) : (
+                <Spinner size="lg" mt="10px" />
+              )}
             </Box>
-            {stats.typingData.scores.length > 0 ? (
-              stats.typingData.scores.map((score, idx) => (
-                <Box
-                  key={score.date}
-                  my="15px"
-                  py="15px"
-                  borderBottom={
-                    idx < stats.typingData.scores.length - 1
-                      ? "3px dashed rgb(234, 240, 245)"
-                      : "none"
-                  }
-                >
-                  <Heading size="sm" as="h4">
-                    {numberToOrdinal(stats.typingData.testsTaken - idx)} Test
-                  </Heading>
-                  <Text>
-                    {score.wpm} WPM &amp; {score.mistakes} Mistakes
-                  </Text>
-                  <Text>
-                    {new Date(score.date).toLocaleString("en-US", {
-                      month: "numeric",
-                      day: "numeric",
-                      hour: "numeric",
-                      minute: "numeric",
-                    })}
-                  </Text>
-                </Box>
-              ))
-            ) : (
-              <Spinner size="lg" mt="10px" />
-            )}
-          </Box>
-        </Grid>
+          </Grid>
+        </Box>
       </main>
     </>
   );
