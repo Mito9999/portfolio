@@ -38,6 +38,7 @@ const numberToOrdinal = (number) => {
 // TODO: make custom pages for each github repo/commit
 export default function Home() {
   useView("/");
+  const [isLoading, setIsLoading] = useState(false);
   const [stats, setStats] = useState({
     isCached: false,
     profile: {
@@ -60,6 +61,7 @@ export default function Home() {
       const res = await fetch("/api/stats");
       const data = await res.json();
       setStats(data);
+      setIsLoading(true);
     };
     getStats();
   }, []);
@@ -91,6 +93,7 @@ export default function Home() {
                 p="20px"
                 borderRadius="5px"
               >
+                {!isLoading && <Spinner ml="auto" mb="-16px" size="sm" />}
                 <Flex direction="row" align="center" minW="300px">
                   <ChakraImage
                     w="120px"
