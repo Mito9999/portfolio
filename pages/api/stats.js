@@ -1,3 +1,22 @@
+import axios from "axios";
+import { JSDOM } from "jsdom";
+
+const getContributions = async (username) => {
+  try {
+    const { data: html } = await axios.get(`https://github.com/${username}`);
+    const dom = new JSDOM(html);
+    const $ = (selector) => dom.window.document.querySelector(selector);
+
+    const contribSelector =
+      "div.js-yearly-contributions > div:nth-child(1) > h2";
+    const contributions = $(contribSelector).textContent.trim().split("\n")[0];
+
+    return Number(contributions);
+  } catch {
+    return 710;
+  }
+};
+
 const FIVE_MINUTES = 5 * 60 * 1000;
 const GITHUB_URL = "https://api.github.com/users/Mito9999";
 const TYPING_URL =
@@ -25,17 +44,24 @@ export default async function handler(_, res) {
       return;
     }
 
-    const github = fetch(GITHUB_URL + "/events").then((r) => r.json());
-    const profile = fetch(GITHUB_URL).then((r) => r.json());
-    const typing = fetch(TYPING_URL, TYPING_OPTIONS).then((r) => r.json());
+    const githubP = fetch(GITHUB_URL + "/events").then((r) => r.json());
+    const profileP = fetch(GITHUB_URL).then((r) => r.json());
+    const typingP = fetch(TYPING_URL, TYPING_OPTIONS).then((r) => r.json());
+    const contributionsP = getContributions("Mito9999");
 
-    const data = await Promise.all([github, profile, typing]);
+    const data = await Promise.all([
+      githubP,
+      profileP,
+      typingP,
+      contributionsP,
+    ]);
 
     const ghData = data[0]
       .filter((event) => event.type === "PushEvent")
       .slice(0, 5);
     const { login, public_repos, followers, public_gists, location } = data[1];
     const { avg_norm, graph_data, languages_sorted } = data[2];
+    const contributions = data[3];
 
     const ghProfile = {
       name: login,
@@ -43,6 +69,7 @@ export default async function handler(_, res) {
       followers,
       gists: public_gists,
       location,
+      contributions,
     };
 
     const last5Scores = graph_data

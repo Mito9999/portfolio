@@ -19,6 +19,7 @@ import {
   GithubIcon,
   LocationIcon,
   RepoIcon,
+  CodeIcon,
 } from "../data/icons";
 import useView from "../hooks/useView";
 
@@ -47,12 +48,13 @@ export default function Home() {
       followers: 3,
       gists: 3,
       location: "United States",
+      contributions: 719,
     },
     githubData: [],
     typingData: {
       scores: [],
       average: 0,
-      testsTaken: 615,
+      testsTaken: 645,
     },
   });
 
@@ -90,11 +92,12 @@ export default function Home() {
               <Flex
                 direction="column"
                 bgColor="gray.50"
-                p="20px"
+                p={["10px", "20px"]}
                 borderRadius="5px"
+                minW="320px"
               >
                 {!isLoading && <Spinner ml="auto" mb="-16px" size="sm" />}
-                <Flex direction="row" align="center" minW="300px">
+                <Flex direction="row" align="center" minW="320px">
                   <ChakraImage
                     w="120px"
                     h="120px"
@@ -106,16 +109,22 @@ export default function Home() {
                   <Box ml="20px">
                     <Text fontWeight="bold">{stats.profile.name}</Text>
                     <Flex align="center">
-                      <LocationIcon />
-                      <Text ml="5px">{stats.profile.location}</Text>
-                    </Flex>
-                    <Flex align="center">
                       <RepoIcon />
                       <Text ml="5px">{stats.profile.repos} Projects</Text>
                     </Flex>
                     <Flex align="center">
+                      <CodeIcon />
+                      <Text ml="5px">
+                        {stats.profile.contributions} Contributions
+                      </Text>
+                    </Flex>
+                    <Flex align="center">
                       <FollowersIcon />
                       <Text ml="5px">{stats.profile.followers} Followers</Text>
+                    </Flex>
+                    <Flex align="center">
+                      <LocationIcon />
+                      <Text ml="5px">{stats.profile.location}</Text>
                     </Flex>
                   </Box>
                 </Flex>
