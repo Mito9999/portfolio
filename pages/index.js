@@ -4,6 +4,7 @@ import {
   Flex,
   Grid,
   Heading,
+  Image as ChakraImage,
   Link as ChakraLink,
   Spinner,
   Text,
@@ -13,6 +14,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Title from "../components/Title";
 import { bio, skills } from "../data/content";
+import {
+  FollowersIcon,
+  GithubIcon,
+  LocationIcon,
+  RepoIcon,
+} from "../data/icons";
 import useView from "../hooks/useView";
 
 const numberToOrdinal = (number) => {
@@ -64,10 +71,49 @@ export default function Home() {
 
       <main>
         <Box minH="calc(100vh - 136px)">
-          <Title text="About Me" />
-          <Text mb="25px" textAlign={["left", "justify"]}>
-            {bio}
-          </Text>
+          <Flex direction={["column", "column", "row"]}>
+            <Box mb="25px" mr={["0px", "0px", "15px"]}>
+              <Title text="About Me" />
+              <Text textAlign={["left", "justify"]}>{bio}</Text>
+            </Box>
+
+            <Box mb="25px" ml={["0px", "0px", "15px"]}>
+              <Title text="Profile" Icon={GithubIcon} />
+              <Flex
+                direction="column"
+                bgColor="gray.50"
+                p="20px"
+                borderRadius="5px"
+              >
+                <Flex direction="row" align="center" minW="300px">
+                  <ChakraImage
+                    w="120px"
+                    h="120px"
+                    borderRadius="999px"
+                    border="2px solid"
+                    borderColor="blue.400"
+                    src="https://avatars.githubusercontent.com/u/58613559"
+                  />
+                  <Box ml="20px">
+                    <Text fontWeight="bold">Mito9999</Text>
+                    <Flex align="center">
+                      <LocationIcon />
+                      <Text ml="5px">United States</Text>
+                    </Flex>
+                    <Flex align="center">
+                      <RepoIcon />
+                      <Text ml="5px">24 Projects</Text>
+                    </Flex>
+                    <Flex align="center">
+                      <FollowersIcon />
+                      <Text ml="5px">3 Followers</Text>
+                    </Flex>
+                  </Box>
+                </Flex>
+              </Flex>
+            </Box>
+          </Flex>
+
           <Title text="Skills" />
           <Flex justify="space-between" wrap="wrap" fontSize="100px">
             {skills.map((skill) => (
