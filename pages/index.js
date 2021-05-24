@@ -1,17 +1,18 @@
+import {
+  Badge,
+  Box,
+  Flex,
+  Grid,
+  Heading,
+  Link as ChakraLink,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
-import {
-  Heading,
-  Box,
-  Text,
-  Grid,
-  Flex,
-  Badge,
-  Spinner,
-  Link as ChakraLink,
-} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import Title from "../components/Title";
-import { useState, useEffect } from "react";
+import { bio, skills } from "../data/content";
 import useView from "../hooks/useView";
 
 const numberToOrdinal = (number) => {
@@ -26,54 +27,6 @@ const numberToOrdinal = (number) => {
   };
   return `${number}${suffixes[ordinalRules.select(number)]}`;
 };
-
-const skills = [
-  {
-    title: "HTML",
-    color: "orange",
-    iconClass: "devicon-html5-plain",
-  },
-  {
-    title: "CSS",
-    color: "blue",
-    iconClass: "devicon-css3-plain",
-  },
-  {
-    title: "JavaScript",
-    color: "yellow",
-    iconClass: "devicon-javascript-plain",
-  },
-  {
-    title: "TypeScript",
-    color: "blue",
-    iconClass: "devicon-typescript-plain",
-  },
-  {
-    title: "Git",
-    color: "blackAlpha",
-    iconClass: "devicon-git-plain",
-  },
-  {
-    title: "MongoDB",
-    color: "green",
-    iconClass: "devicon-mongodb-plain",
-  },
-  {
-    title: "Express",
-    color: "gray",
-    iconClass: "devicon-express-original",
-  },
-  {
-    title: "React",
-    color: "blue",
-    iconClass: "devicon-react-original",
-  },
-  {
-    title: "NodeJS",
-    color: "green",
-    iconClass: "devicon-nodejs-plain",
-  },
-];
 
 // TODO: make custom pages for each github repo/commit
 export default function Home() {
@@ -112,13 +65,7 @@ export default function Home() {
       <main>
         <Title text="About Me" />
         <Text mb="25px" textAlign={["left", "justify"]}>
-          Hey! I'm Mito, a dependable web developer. I have been coding
-          professionally for over a year, and amateurly for over four years. I
-          am always eager to learn new technologies and techniques. My primary
-          focus has been on front-end development, but I also have experience
-          with back-end technologies. Through the development of various
-          projects, I have found new ways to improve efficiency and
-          sustainability.
+          {bio}
         </Text>
         <Title text="Skills" />
         <Flex justify="space-between" wrap="wrap" fontSize="100px">

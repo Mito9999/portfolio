@@ -1,14 +1,14 @@
-import Head from "next/head";
-import Link from "next/link";
 import {
-  extendTheme,
+  Box,
+  Button,
   ChakraProvider,
   Container,
-  Box,
-  Heading,
+  extendTheme,
   Flex,
-  Button,
+  Heading,
 } from "@chakra-ui/react";
+import Head from "next/head";
+import Link from "next/link";
 
 const extendedTheme = extendTheme({
   fonts: { body: "Inter", heading: "Inter", mono: "Inter" },
