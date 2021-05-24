@@ -40,7 +40,13 @@ export default function Home() {
   useView("/");
   const [stats, setStats] = useState({
     isCached: false,
-    repos: 17,
+    profile: {
+      name: "Mito9999",
+      repos: 24,
+      followers: 3,
+      gists: 3,
+      location: "United States",
+    },
     githubData: [],
     typingData: {
       scores: [],
@@ -95,18 +101,18 @@ export default function Home() {
                     src="https://avatars.githubusercontent.com/u/58613559"
                   />
                   <Box ml="20px">
-                    <Text fontWeight="bold">Mito9999</Text>
+                    <Text fontWeight="bold">{stats.profile.name}</Text>
                     <Flex align="center">
                       <LocationIcon />
-                      <Text ml="5px">United States</Text>
+                      <Text ml="5px">{stats.profile.location}</Text>
                     </Flex>
                     <Flex align="center">
                       <RepoIcon />
-                      <Text ml="5px">24 Projects</Text>
+                      <Text ml="5px">{stats.profile.repos} Projects</Text>
                     </Flex>
                     <Flex align="center">
                       <FollowersIcon />
-                      <Text ml="5px">3 Followers</Text>
+                      <Text ml="5px">{stats.profile.followers} Followers</Text>
                     </Flex>
                   </Box>
                 </Flex>
@@ -152,7 +158,7 @@ export default function Home() {
                 <Text>
                   Most Recent Actions{" "}
                   <Text as="span" color="rgb(140, 150, 155)">
-                    / {stats.repos} repos
+                    / {stats.profile.repos} repos
                   </Text>
                 </Text>
               </Box>

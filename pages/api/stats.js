@@ -34,8 +34,16 @@ export default async function handler(_, res) {
     const ghData = data[0]
       .filter((event) => event.type === "PushEvent")
       .slice(0, 5);
-    const { public_repos: repos } = data[1];
+    const { login, public_repos, followers, public_gists, location } = data[1];
     const { avg_norm, graph_data, languages_sorted } = data[2];
+
+    const ghProfile = {
+      name: login,
+      repos: public_repos,
+      followers,
+      gists: public_gists,
+      location,
+    };
 
     const last5Scores = graph_data
       .slice(graph_data.length - 5, graph_data.length)
@@ -52,7 +60,7 @@ export default async function handler(_, res) {
       scores: last5Scores,
       testsTaken: Number(totalTypingTests),
     };
-    const jsonData = { repos, githubData: ghData, typingData };
+    const jsonData = { profile: ghProfile, githubData: ghData, typingData };
     cache.put("values", jsonData, FIVE_MINUTES);
     res.status(200).json({ isCached: false, ...jsonData });
   } catch (err) {
