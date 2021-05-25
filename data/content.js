@@ -35,21 +35,6 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Feed",
-    code: "https://github.com/Mito9999/feed",
-    url: "https://my-feed.netlify.app/",
-    description: "A customizable display of your most important media.",
-    image: {
-      src: "/feed.png",
-      width: "1059px",
-      height: "889px",
-    },
-    story:
-      "This was my first TypeScript and Chakra UI experience. I learned a lot about both of these technologies through the creation of this project and its features. In order to create a truly customizable feed, I had to become efficient at consuming APIs. While creating the infinite scrolling feature, I learned about optimizing components for performance and compatibility.",
-    tech: ["React.js", "TypeScript", "Chakra UI", "APIs"],
-  },
-  {
-    id: 3,
     title: "Dyftd",
     code: "https://github.com/Mito9999/dyftd",
     url: "https://dyftd.vercel.app/",
@@ -64,7 +49,36 @@ export const projects = [
     tech: ["React.js", "TypeScript", "Chakra UI", "MongoDB", "Next.js"],
   },
   {
+    id: 3,
+    title: "Rewards",
+    code: "https://github.com/Mito9999/slots-app",
+    description: "User-customizable tier based reward system",
+    image: {
+      src: "/rewards.png",
+      width: "950px",
+      height: "525px",
+    },
+    story:
+      "In order to put my newly acquired React skills to the test, I worked with a client to quickly build a Minimum Viable Product to their specification.",
+    tech: ["React.js", "Electron.js", "CSS"],
+  },
+  {
     id: 4,
+    title: "Feed",
+    code: "https://github.com/Mito9999/feed",
+    url: "https://my-feed.netlify.app/",
+    description: "A customizable display of your most important media.",
+    image: {
+      src: "/feed.png",
+      width: "1059px",
+      height: "889px",
+    },
+    story:
+      "This was my first TypeScript and Chakra UI experience. I learned a lot about both of these technologies through the creation of this project and its features. In order to create a truly customizable feed, I had to become efficient at consuming APIs. While creating the infinite scrolling feature, I learned about optimizing components for performance and compatibility.",
+    tech: ["React.js", "TypeScript", "Chakra UI", "APIs"],
+  },
+  {
+    id: 5,
     title: "Money Tracker",
     code: "https://github.com/Mito9999/moneytracker",
     description: "An easy way to visualize your spending and savings habits!",
@@ -73,7 +87,7 @@ export const projects = [
     tech: ["React.js", "TypeScript", "SCSS"],
   },
   {
-    id: 5,
+    id: 6,
     title: "Cars",
     code: "https://github.com/Mito9999/cars",
     description: "A simple API for finding great deals on cars.",
