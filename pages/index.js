@@ -44,11 +44,11 @@ export default function Home() {
     isCached: false,
     profile: {
       name: "Mito9999",
-      repos: 24,
-      followers: 3,
+      repos: 19,
+      followers: 4,
       gists: 3,
       location: "United States",
-      contributions: 719,
+      contributions: 748,
     },
     githubData: [],
     typingData: {
@@ -91,10 +91,12 @@ export default function Home() {
               <Title text="Profile" Icon={GithubIcon} />
               <Flex
                 direction="column"
-                bgColor="gray.50"
+                bgColor="gray.100"
                 p={["10px", "20px"]}
                 borderRadius="5px"
                 minW="320px"
+                _hover={{ transform: "scale(1.05)" }}
+                transition="transform 200ms"
               >
                 {!isLoading && <Spinner ml="auto" mb="-16px" size="sm" />}
                 <Flex direction="row" align="center" minW="320px">
@@ -102,7 +104,7 @@ export default function Home() {
                     w="120px"
                     h="120px"
                     borderRadius="999px"
-                    border="2px solid"
+                    border="3px solid"
                     borderColor="blue.400"
                     src="https://avatars.githubusercontent.com/u/58613559"
                   />

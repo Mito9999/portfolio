@@ -13,7 +13,7 @@ const getContributions = async (username) => {
 
     return Number(contributions);
   } catch {
-    return 710;
+    return 750;
   }
 };
 
