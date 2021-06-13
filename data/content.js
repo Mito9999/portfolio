@@ -99,15 +99,31 @@ export const projects = [
 
 export const awards = [
   {
-    title: "M103: MongoDB Cluster Administration",
+    title: "CompTIA Security+",
     date: "In Progress",
-    contentColor: "green",
+    contentColor: "red",
     content: [
-      "Mongod",
-      "Replication",
-      "Set Administration",
-      "Sharding",
-      "Cluster Management",
+      "Malware",
+      "Virtualization",
+      "Cloud Security",
+      "Auditing",
+      "Cryptography",
+      "Protocols",
+      "Forensics",
+    ],
+  },
+  {
+    title: "CompTIA Network+",
+    date: "In Progress",
+    contentColor: "red",
+    content: [
+      "Networking",
+      "Management",
+      "Security",
+      "Troubleshooting",
+      "Cabling",
+      "Infrastructure",
+      "Routing",
     ],
   },
   {
