@@ -1,36 +1,33 @@
-import axios from "axios";
+import { connectToDatabase } from "../../utils/notion";
 
-const discordWebookUrl =
-  "https://discord.com/api/webhooks/845393858006876200/2vzH-gltHQG67dwlDddIp5yDRoVphtySVR02tsLtDiq63fBuFgeckZGL7mLLeacw7y8C";
+const NOTION_NAME_ID = "title";
+const NOTION_EMAIL_ID = "{r@t";
+const NOTION_SUBJECT_ID = "beK>";
+const NOTION_MESSAGE_ID = "^O`M";
+const database_id = process.env.NOTION_DATABASE_ID;
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const now = new Date();
       const { name, email, subject, message } = req.body;
-      const discordEmbed = {
-        username: "mito9999",
-        avatar_url: "https://avatars.githubusercontent.com/u/58613559",
-        content: "<@570383339811504159>",
-        embeds: [
-          {
-            title: "Contact Form",
-            url: "https://mito9999.vercel.app/contact",
-            color: 15548997,
-            fields: [
-              { name: "Name", value: name, inline: true },
-              { name: "Email", value: email, inline: true },
-              { name: "Subject", value: subject },
-              { name: "Message", value: message },
-            ],
-            footer: {
-              text:
-                now.toLocaleDateString() + " at " + now.toLocaleTimeString(),
-            },
-          },
-        ],
-      };
 
-      await axios.post(discordWebookUrl, discordEmbed);
+      const { notion } = await connectToDatabase(database_id);
+
+      notion.pages.create({
+        parent: { database_id },
+        properties: {
+          [NOTION_NAME_ID]: {
+            title: [{ type: "text", text: { content: name || "___" } }],
+          },
+          [NOTION_EMAIL_ID]: { email: email || "___@___" },
+          [NOTION_SUBJECT_ID]: {
+            rich_text: [{ type: "text", text: { content: subject || "___" } }],
+          },
+          [NOTION_MESSAGE_ID]: {
+            rich_text: [{ type: "text", text: { content: message || "___" } }],
+          },
+        },
+      });
 
       res.status(200).json({ msg: "Message Sent." });
     } catch (err) {
