@@ -1,30 +1,31 @@
-import axios from "axios";
+import { connectToDatabase } from "../../utils/notion";
 
-const discordWebookUrl =
-  "https://discord.com/api/webhooks/845405585562140724/ZtO2y12RZlRBOmgbuI21xH6ZXmYI7FjkUZCcsDdG16Vluw6ZEA2NtnmU1EY6DJ8ZxK6Q";
+const database_id = process.env.NOTION_VIEWS_DATABASE_ID;
+
 export default async function handler(req, res) {
   try {
-    const now = new Date();
-    const { path } = req.body;
-    const discordEmbed = {
-      username: "View",
-      avatar_url: "https://avatars.githubusercontent.com/u/58613559",
-      embeds: [
-        {
-          title: "New Page View",
-          url: "https://mito9999.vercel.app" + path,
-          fields: [{ name: "Path", value: path }],
-          footer: {
-            text: now.toLocaleDateString() + " at " + now.toLocaleTimeString(),
-          },
-        },
-      ],
-    };
+    if (process.env.MODE !== "production") {
+      res
+        .status(400)
+        .json({ msg: "Site is under development, no views are counted" });
+      return;
+    }
 
-    await axios.post(discordWebookUrl, discordEmbed);
+    const { path } = req.body;
+
+    const notion = await connectToDatabase(database_id);
+    notion.pages.create({
+      parent: { database_id },
+      properties: {
+        Route: {
+          title: [{ type: "text", text: { content: path || "none" } }],
+        },
+      },
+    });
 
     res.status(200).json({ msg: "Success" });
-  } catch {
+  } catch (err) {
+    console.log(err);
     res.status(500).json({ msg: "Error" });
   }
 }

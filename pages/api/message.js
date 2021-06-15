@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     try {
       const { name, email, subject, message } = req.body;
 
-      const { notion } = await connectToDatabase(database_id);
+      const notion = await connectToDatabase(database_id);
 
       notion.pages.create({
         parent: { database_id },
