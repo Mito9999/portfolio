@@ -1,3 +1,5 @@
+import { Link } from "@chakra-ui/react";
+
 export const bio = `Hey! I'm Mito, a dependable web developer. I have been coding professionally for over a year, and amateurly for over four years. I am always eager to learn new technologies and techniques. My primary focus has been on front-end development, but I also have experience with back-end technologies. Through the development of various projects, I have found new ways to improve efficiency and sustainability.`;
 
 export const skills = [
@@ -19,6 +21,55 @@ export const skills = [
 export const projects = [
   {
     id: 1,
+    title: "Life Calendar",
+    code: "https://github.com/Mito9999/life-calendar",
+    url: "https://calendar-of-your-life.vercel.app/",
+    description:
+      "A visualization of the time in your life inspired by Kurzgesagt",
+    image: {
+      src: "/calendar.png",
+      width: "1180px",
+      height: "821px",
+    },
+    story: (
+      <>
+        While browsing YouTube, I came across an interesting video titled "
+        <Link
+          href="https://www.youtube.com/watch?v=JXeJANDKwDc"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="blue.500"
+        >
+          What Are You Doing With Your Life?
+        </Link>
+        " which then advertised a poster to represent the weeks of your life.
+        This turned out to be a really good website idea, so I implemented it as
+        quickly as possible. Due to it's unique layout, I learned a lot about
+        positioning, negative margins, performance, and SVG icons. Full credit
+        for the original design concept goes to{" "}
+        <Link
+          href="https://www.youtube.com/channel/UCsXVk37bltHxD1rDPwtNM8Q"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="blue.500"
+        >
+          Kurzgesagt
+        </Link>
+        , and you can find their incredible poster at{" "}
+        <Link
+          href="https://shop-us.kurzgesagt.org/collections/existential-dread/products/lifespan-calendar-poster"
+          target="_blank"
+          rel="noopener noreferrer"
+          color="blue.500"
+        >
+          https://shop-us.kurzgesagt.org/collections/existential-dread/products/lifespan-calendar-poster
+        </Link>
+      </>
+    ),
+    tech: ["React.js", "TypeScript", "Chakra UI", "Next.js"],
+  },
+  {
+    id: 2,
     title: "Statboard",
     code: "https://github.com/Mito9999/statboard",
     url: "https://statboard.vercel.app/",
@@ -26,30 +77,30 @@ export const projects = [
       "The one place to view all of your information from various sources!",
     image: {
       src: "/statboard.png",
-      width: "1050px",
-      height: "669px",
+      width: "1027px",
+      height: "708px",
     },
     story:
-      "I built this application to boost my productivity and gain insight into my goals. I wanted a way to track how well I was doing over time, and learn some useful technologies along the way.",
+      "I built this application to boost my productivity and gain insight into my goals. I wanted a way to track how well I was doing over time, and learn some useful technologies along the way. The main area that I improved in from this project was integrating APIs and fixing CORS errors.",
     tech: ["React.js", "JavaScript", "Styled Components", "CSS", "APIs"],
   },
   {
-    id: 2,
+    id: 3,
     title: "Dyftd",
     code: "https://github.com/Mito9999/dyftd",
     url: "https://dyftd.vercel.app/",
     description: "Did you feed the dog? Collaborative toggles.",
     image: {
       src: "/dyftd.png",
-      width: "1077px",
-      height: "769px",
+      width: "1201px",
+      height: "854px",
     },
     story:
       "My first experience with the MERN(T) Stack. User Experience was my main goal in mind, so I  made the application as smooth as possible with clean animations and consistency. After getting one of my MongoDB certificates, I reimplemented and restructured the backend for scalability. This project was originially built with Create React App (Express + Node), but was migrated to Next.js (Serverless).",
     tech: ["React.js", "TypeScript", "Chakra UI", "MongoDB", "Next.js"],
   },
   {
-    id: 3,
+    id: 4,
     title: "Rewards",
     code: "https://github.com/Mito9999/slots-app",
     description: "User-customizable tier based reward system",
@@ -63,7 +114,7 @@ export const projects = [
     tech: ["React.js", "Electron.js", "CSS"],
   },
   {
-    id: 4,
+    id: 5,
     title: "Feed",
     code: "https://github.com/Mito9999/feed",
     url: "https://my-feed.netlify.app/",
@@ -78,7 +129,7 @@ export const projects = [
     tech: ["React.js", "TypeScript", "Chakra UI", "APIs"],
   },
   {
-    id: 5,
+    id: 6,
     title: "Money Tracker",
     code: "https://github.com/Mito9999/moneytracker",
     description: "An easy way to visualize your spending and savings habits!",
@@ -87,7 +138,7 @@ export const projects = [
     tech: ["React.js", "TypeScript", "SCSS"],
   },
   {
-    id: 6,
+    id: 7,
     title: "Cars",
     code: "https://github.com/Mito9999/cars",
     description: "A simple API for finding great deals on cars.",
